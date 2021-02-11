@@ -275,7 +275,9 @@
                     window.location.reload()
                 }
                 else {
-                    alert(`Error creating application, total ${json.message.length} errors.\n\n${json.message.map((m) => m)}`)
+                    alert(`Error creating application`)
+                    window.location.reload()
+
                 }
             })
     }
