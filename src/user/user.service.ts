@@ -39,6 +39,7 @@ export class UserService {
     if (user === null) {
       throw new NotFoundException('user not found');
     }
+   
 
     const hashCheck = await bcrypt.compareSync(password, user.password);
     if (hashCheck === true) {

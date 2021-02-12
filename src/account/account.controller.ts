@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Logger, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Logger, Param, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Response } from 'express';
 import { IncomingAuthDto, IncomingAuthLoginDto } from './dto/incoming-auth.dto';
 import { AccountService } from './account.service';
@@ -9,6 +9,7 @@ import { CreateUserDtoWithCaptcha } from 'src/user/dto/create-user.dto';
 import { ApplicationService } from 'src/application/application.service';
 import { AccessUserDetailsDto } from './dto/access-user-details.dto';
 import { MailerService } from 'src/mailer/mailer.service';
+import { findConfigFile } from 'typescript';
 
 @Controller('account')
 export class AccountController {
@@ -139,11 +140,6 @@ export class AccountController {
       const cookieData = await this.authService.generateJwt(jwtData);
       res.cookie('vitAuth', cookieData);
       //   res.render('profile/homepage', user);
-
-      this.logger.verbose("*************")
-      this.mailerService.sendEmail(user.collegeEmail,user._id)
-      this.logger.verbose("*************")
-
       res.redirect('./../dashboard');
     } catch (e) {
       return res.render('account/login', { server: { message: e.message } });
@@ -186,14 +182,18 @@ export class AccountController {
   /**
    * Page to receive verification callback from email
    */
-  @Get('/register/verify')
-  async showRegisterSuccessPage(@Res() res: Response) {
+  @Get('/register/verify/:token')
+  
+    
+  async showRegisterSuccessPage(@Res() res: Response, @Param('token') token: string) {
     try {
+      this.mailerService.verifyJwt((token))
       return res.render('account/register/verify');
     } catch (e) {
       return res.render('error', e.response);
     }
   }
+
 
   @Post('/register')
   @UsePipes(
@@ -209,6 +209,7 @@ export class AccountController {
           message: 'please check your email for verification link',
         },
       };
+      this.mailerService.sendEmail(response.collegeEmail,response.collegeEmail)
       return res.render('account/register', templateData);
     } catch (e) {
       const templateData = {

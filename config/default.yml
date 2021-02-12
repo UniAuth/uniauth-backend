@@ -27,10 +27,10 @@ confirm_email_token:
   expires: 15m
 
 nodemailer_config:
-  host: 'smtp.sendgrid.net',
-  port: 465,
-  secure: true, 
+  host: 'smtp.sendgrid.net'
+  port: 465
+  secure: true 
   auth: {
-      user: 'apikey', 
+      user: 'apikey'
       pass: 'blablabla'
     }
