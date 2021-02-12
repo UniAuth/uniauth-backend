@@ -28,10 +28,6 @@ export class MailerService {
     try {
       const isValidToken = await this.jwtService.verifyAsync(token, confirmEmailTokenConstants);
       this.logger.verbose(isValidToken)
-      // const user = await this.userModel.findOne(isValidToken.id).select('verified');
-      // this.logger.verbose(user.verified)
-      // user.verified = true    
-      // this.logger.verbose(user.verified)
       this.updateVerifiedStatus(isValidToken)
        return isValidToken;
     } catch (e) {
