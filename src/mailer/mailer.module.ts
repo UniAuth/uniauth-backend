@@ -17,8 +17,10 @@ import { UserService } from 'src/user/user.service';
       secret: accessTokenJwtConstants.secret,
       signOptions: { expiresIn: accessTokenJwtConstants.expiresIn },
     }),
+    AccountModule
     ],
+    
   controllers: [MailerController],
-  providers: [MailerService,AccountService]
+  providers: [MailerService]
 })
 export class MailerModule {}
