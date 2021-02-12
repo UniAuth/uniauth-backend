@@ -8,6 +8,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { CreateUserDtoWithCaptcha } from 'src/user/dto/create-user.dto';
 import { ApplicationService } from 'src/application/application.service';
 import { AccessUserDetailsDto } from './dto/access-user-details.dto';
+import { MailerService } from 'src/mailer/mailer.service';
 
 @Controller('account')
 export class AccountController {
@@ -18,6 +19,8 @@ export class AccountController {
     @Inject(UserService) private readonly userService: UserService,
     @Inject(AuthService) private readonly authService: AuthService,
     @Inject(ApplicationService) private readonly applicationService: ApplicationService,
+    @Inject(MailerService) private readonly mailerService: MailerService,
+
   ) {}
 
   /**
@@ -136,6 +139,11 @@ export class AccountController {
       const cookieData = await this.authService.generateJwt(jwtData);
       res.cookie('vitAuth', cookieData);
       //   res.render('profile/homepage', user);
+
+      console.log("*************")
+      this.mailerService.sendEmail(user.collegeEmail,user._id)
+      console.log("*************")
+
       res.redirect('./../dashboard');
     } catch (e) {
       return res.render('account/login', { server: { message: e.message } });
