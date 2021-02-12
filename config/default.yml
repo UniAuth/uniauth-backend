@@ -32,5 +32,5 @@ nodemailer_config:
   secure: true, 
   auth: {
       user: 'apikey', 
-      pass: 'SG.BBpQVJfDTTeTJDy1VH5VUA.R2fzBBI1doeMFWVO3VFJMUMWqs-ZDqqOq6fZVm-vHzo'
+      pass: 'blablabla'
     }
