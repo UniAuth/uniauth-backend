@@ -29,8 +29,7 @@ confirm_email_token:
 nodemailer_config:
   host: 'smtp.sendgrid.net'
   port: 465
-  secure: true 
-  auth: {
-      user: 'apikey'
-      pass: 'blablabla'
-    }
+  secure: true
+  auth:
+    user: 'apikey'
+    pass: 'blablabla'
