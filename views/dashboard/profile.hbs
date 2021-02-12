@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dev</title>
     <link rel="icon" href="https://avatars.githubusercontent.com/u/78133145?s=200&v=4">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
 </head>
-
+<style>
+    .btn{
+        background-color: rgb(70, 122, 235);
+        padding: 10px 10px;
+        display: inline-block;
+        color: white;
+        margin-left: 100px;
+    }
+</style>
 <body>
     {{!-- dashboard header starts --}}
     <header class="text-gray-700 bg-white border-t border-b body-font">
@@ -38,6 +45,8 @@
         <b>Registration Number</b> : {{user.registrationNumber}} <br />
 
     </section>
+
+    <a class="btn" href="/user/{{user._id}}/edit">Edit</a>
 
 </body>
 

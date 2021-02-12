@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Res, UseGuards, Request, Inject } from '@nestjs/common';
+import { Controller, Get, Patch, Param, Body, Logger, Res, UseGuards, Request, Inject } from '@nestjs/common';
 import { DashboardService } from './dashboard.service';
 import { Response } from 'express';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -8,6 +8,7 @@ import { LoggedInUser } from 'src/auth/interface/loggedInUser.interface';
 import { SCOPE } from 'src/account/minions/scopeMapper.minion';
 import { ApplicationModule } from 'src/application/application.module';
 import { ApplicationService } from 'src/application/application.service';
+import { RegistrationNumber } from 'src/auxiliary/validators/registrationNumber.validator';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -43,9 +44,8 @@ export class DashboardController {
     const user = await this.userService.findOneById(loggedInUser.id);
     return res.render('dashboard/profile.hbs', { user });
   }
-
   /**
-   * To load data tab
+   * To load data tab 
    */
   @Get('/data')
   @UseGuards(JwtAuthGuard)

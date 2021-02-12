@@ -89,8 +89,27 @@ export class UserService {
     return this.userModel.findOne({ _id: userId });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+
+    let { name, collegeEmail, registrationNumber } = updateUserDto;
+    const regNumber = new RegistrationNumberWorker(registrationNumber);
+    const branch = regNumber.getBranch();
+    const batch = regNumber.getYear();
+    let user = await this.findOneById(id);
+    if (name) {
+      user.name = name;
+    }
+    if (collegeEmail) {
+      user.collegeEmail = collegeEmail;
+    }
+    if (registrationNumber) {
+      user.registrationNumber = registrationNumber;
+      user.branch = branch,
+      user.batch = batch
+    }
+    user.save()
+
+    return user;
   }
 
   remove(id: number) {
