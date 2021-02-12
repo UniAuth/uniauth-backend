@@ -64,6 +64,3 @@ The user sees the following screen when during login
   - Inside [Handlebar](https://handlebarsjs.com/)
 - Database 
   - [MongoDB](https://docs.mongodb.com/) via [Mongoose](https://mongoosejs.com/)
-  
-  
-
