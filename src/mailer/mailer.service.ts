@@ -27,8 +27,8 @@ export class MailerService {
           port: config.get('nodemailer_config.port'),
           secure: config.get('nodemailer_config.secure'), 
           auth: {
-            user: config.get('nodemailer_config.user'), 
-            pass: config.get('nodemailer_config.pass'), 
+            user: config.get('nodemailer_config.auth.user'), 
+            pass: config.get('nodemailer_config.auth.pass'), 
           },
         });
       
