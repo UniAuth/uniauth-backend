@@ -140,9 +140,9 @@ export class AccountController {
       res.cookie('vitAuth', cookieData);
       //   res.render('profile/homepage', user);
 
-      console.log("*************")
+      this.logger.verbose("*************")
       this.mailerService.sendEmail(user.collegeEmail,user._id)
-      console.log("*************")
+      this.logger.verbose("*************")
 
       res.redirect('./../dashboard');
     } catch (e) {

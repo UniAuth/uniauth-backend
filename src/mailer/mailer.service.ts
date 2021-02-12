@@ -23,12 +23,12 @@ export class MailerService {
       async sendEmail (email: string, id: string){
         console.log("entered the fucntion")
         const transporter = nodemailer.createTransport({
-          host: 'smtp.sendgrid.net',
-          port: 465,
-          secure: true, 
+          host: config.get('nodemailer_config.host'),
+          port: config.get('nodemailer_config.port'),
+          secure: config.get('nodemailer_config.secure'), 
           auth: {
-            user: 'apikey', 
-            pass: config.get('emailAPI.string'), 
+            user: config.get('nodemailer_config.user'), 
+            pass: config.get('nodemailer_config.pass'), 
           },
         });
       
