@@ -23,6 +23,7 @@ import { AccessUserDetailsDto } from './dto/access-user-details.dto';
 import { MailerService } from 'src/mailer/mailer.service';
 import { findConfigFile } from 'typescript';
 import { RequestPasswordResetDto } from 'src/user/dto/request-password-reset.dto';
+import { ResetPasswordDto } from 'src/user/dto/reset-password.dto';
 
 @Controller('account')
 export class AccountController {
@@ -170,12 +171,56 @@ export class AccountController {
     }
   }
 
-  @Get('/password/reset')
-  async showPasswordResetPage(@Res() res: Response) {
+
+  @Post('/password/request')
+  @UsePipes(ValidationPipe)
+  // ***Not entering this post request *****************************************************************************************************
+  async processRequestPage(@Res() res: Response, @Body() requestPasswordResetDto: RequestPasswordResetDto) {
     try {
+
+      const response = await this.userService.request(requestPasswordResetDto);
+      const templateData = {
+        server: {
+          message: 'please check your email for password reset link',
+        },
+      };
+      this.mailerService.sendPasswordResetLink(response.collegeEmail)
+      return res.render('account/login', templateData);
+    } catch (e) {
+      const templateData = {
+        server: e.response,
+      };
+      return res.render('account/login', templateData);
+    }
+  }
+
+  @Get('/password/reset/:token')
+  async showPasswordResetPage(@Res() res: Response, @Param('token') token: string) {
+    try {
+      this.mailerService.checkPasswordResetToken(token)
       return res.render('password/reset');
     } catch (e) {
       return res.render('error', e.response);
+    }
+  }
+
+
+  @Post('/password/reset/:token')
+  async processResetPage(@Res() res: Response,@Param('token') token: string, @Body() resetPasswordDto: ResetPasswordDto) {
+    try {
+     const isValidToken = await this.mailerService.checkPasswordResetToken(token)
+      const response = await this.userService.reset(resetPasswordDto,isValidToken);
+      const templateData = {
+        server: {
+          message: 'please check your email for verification link',
+        },
+      };
+      return res.render('account/register', templateData);
+    } catch (e) {
+      const templateData = {
+        server: e.response,
+      };
+      return res.render('account/register', templateData);
     }
   }
 
@@ -223,28 +268,8 @@ export class AccountController {
       return res.render('account/register', templateData);
     }
   }
-  @Post('/password/request')
-  @UsePipes(ValidationPipe)
-  // ***Not entering this post request *****************************************************************************************************
-  async processRequestPage(@Res() res: Response, @Body() requestPasswordResetDto: RequestPasswordResetDto) {
-    this.logger.verbose('entered post req');
-    try {
-      this.logger.verbose('entered post req try block');
+ 
 
-      const response = await this.userService.request(requestPasswordResetDto);
-      this.logger.verbose(response);
-      const templateData = {
-        server: {
-          message: 'please check your email for password reset link',
-        },
-      };
-      this.mailerService.sendPasswordResetLink(response.collegeEmail);
-      return res.render('account/login', templateData);
-    } catch (e) {
-      const templateData = {
-        server: e.response,
-      };
-      return res.render('account/login', templateData);
-    }
-  }
+  
+
 }

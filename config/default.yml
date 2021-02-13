@@ -32,4 +32,4 @@ nodemailer_config:
   secure: true
   auth:
     user: 'apikey'
-    pass: 'blablabla'
+    pass: 'blablah'

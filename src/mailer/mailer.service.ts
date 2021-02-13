@@ -43,6 +43,17 @@ export class MailerService {
     }
   }
 
+  async checkPasswordResetToken(token: string) {
+    try {
+      this.logger.verbose(`Token received ${token}`);
+      const isValidToken = await this.jwtService.verifyAsync(token, confirmEmailTokenConstants);
+      this.logger.verbose(`IsValidToken=${isValidToken}`);
+      return isValidToken;
+    } catch (e) {
+      throw new UnauthorizedException(`invalid access`);
+    }
+  }
+
   async sendEmail(email: string) {
     const transporter = nodemailer.createTransport({
       host: config.get('nodemailer_config.host'),
@@ -77,8 +88,10 @@ export class MailerService {
       },
     });
 
+    
+
     const token = await this.generateJwt({ email });
-    const link = `http://localhost:5000/account/register/verify/${token}`;
+    const link = `http://localhost:5000/account/password/reset/${token}`;
 
     const mailDetails = await transporter.sendMail({
       from: 'ultimateraze011@gmail.com', // sender address

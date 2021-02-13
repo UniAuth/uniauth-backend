@@ -12,6 +12,7 @@ import * as bcrypt from 'bcrypt';
 import { LoginDto } from 'src/auth/dto/login.dto';
 import { Application } from 'src/application/application.schema';
 import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 /**
  * **User Service**
@@ -74,17 +75,27 @@ export class UserService {
   
   async request(requestPasswordResetDto: RequestPasswordResetDto): Promise<User> {
     const { email} = requestPasswordResetDto;
-    this.logger.verbose(email,"PPPPPPPPPPPPPPPPP")
 
     const user = await this.userModel.findOne({ collegeEmail: email }).select('collegeEmail');
   if (user === null) {
-    this.logger.verbose(user)
     throw new NotFoundException('user not found');
   }
   else{
-    this.logger.verbose(user,"not empty")
-
     return user
+  }
+  }
+
+
+
+  async reset(resetPasswordDto: ResetPasswordDto,isValidToken): Promise<User> {
+    let { password_1,password_2} = resetPasswordDto;
+    password_1 = await bcrypt.hashSync(password_1, 10)
+    const user = await this.userModel.findOneAndUpdate(isValidToken.id,{password : password_1});
+    if (user === null) {
+    throw new NotFoundException('user not found');
+  }
+  else{
+    return user;
   }
   }
 
