@@ -94,12 +94,13 @@ export class UserController {
     return res.render('profile/edit.hbs',{user})
   }
 
-  @Put('/:id')
+  @Post('/:id/edit')
+
   @UseGuards(JwtAuthGuard)
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto,@Res() res,@Request() req) {
+  async PostEditForm(@Body() updateUserDto: UpdateUserDto, @Request() req,@Res() res: Response,@Param('id') id: string){
     const user = await this.userService.update(id, updateUserDto);
-    return this.DashboardController.showProfile(req,res)
-  }   
+    return res.redirect('/dashboard/')
+  }
 
   /**
    * Responds to: _DELETE(`/:id`)_
