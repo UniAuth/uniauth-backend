@@ -1,4 +1,16 @@
-import { Body, Controller, Get, Inject, Logger, Param, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Logger,
+  Param,
+  Post,
+  Query,
+  Res,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { IncomingAuthDto, IncomingAuthLoginDto } from './dto/incoming-auth.dto';
 import { AccountService } from './account.service';
@@ -22,7 +34,6 @@ export class AccountController {
     @Inject(AuthService) private readonly authService: AuthService,
     @Inject(ApplicationService) private readonly applicationService: ApplicationService,
     @Inject(MailerService) private readonly mailerService: MailerService,
-
   ) {}
 
   /**
@@ -184,23 +195,17 @@ export class AccountController {
    * Page to receive verification callback from email
    */
   @Get('/register/verify/:token')
- 
   async showRegisterSuccessPage(@Res() res: Response, @Param('token') token: string) {
     try {
-      this.mailerService.verifyJwt((token))
+      this.mailerService.checkVerificationToken(token);
       return res.render('account/register/verify');
     } catch (e) {
       return res.render('error', e.response);
     }
   }
 
-
   @Post('/register')
-  @UsePipes(
-    new ValidationPipe({
-      disableErrorMessages: false,
-    }),
-  )
+  @UsePipes(ValidationPipe)
   async processRegisterPage(@Res() res: Response, @Body() createUserDtoWithCaptcha: CreateUserDtoWithCaptcha) {
     try {
       const response = await this.userService.create(createUserDtoWithCaptcha);
@@ -209,7 +214,7 @@ export class AccountController {
           message: 'please check your email for verification link',
         },
       };
-      this.mailerService.sendEmail(response.collegeEmail)
+      this.mailerService.sendEmail(response.collegeEmail);
       return res.render('account/register', templateData);
     } catch (e) {
       const templateData = {
@@ -222,18 +227,18 @@ export class AccountController {
   @UsePipes(ValidationPipe)
   // ***Not entering this post request *****************************************************************************************************
   async processRequestPage(@Res() res: Response, @Body() requestPasswordResetDto: RequestPasswordResetDto) {
-    this.logger.verbose("entered post req")
+    this.logger.verbose('entered post req');
     try {
-      this.logger.verbose("entered post req try block")
+      this.logger.verbose('entered post req try block');
 
       const response = await this.userService.request(requestPasswordResetDto);
-      this.logger.verbose(response)
+      this.logger.verbose(response);
       const templateData = {
         server: {
           message: 'please check your email for password reset link',
         },
       };
-      this.mailerService.sendPasswordResetLink(response.collegeEmail)
+      this.mailerService.sendPasswordResetLink(response.collegeEmail);
       return res.render('account/login', templateData);
     } catch (e) {
       const templateData = {
@@ -243,7 +248,3 @@ export class AccountController {
     }
   }
 }
-
-
-
-

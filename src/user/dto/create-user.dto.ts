@@ -28,7 +28,7 @@ export class CreateUserDto {
   /** college email of user */
   @ApiProperty({ description: 'college email of user', example: 'yashkumar.verma2019@vitstudent.ac.in' })
   @IsNotEmpty()
-  @IsEmail({ domain_specific_validation: true })
+  @IsEmail()
   collegeEmail: string;
 
   /** password of user */

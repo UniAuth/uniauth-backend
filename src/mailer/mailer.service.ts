@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import * as config from 'config';
 import * as nodemailer from 'nodemailer';
-import { JwtService, } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import { Model, ObjectId } from 'mongoose';
 import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
 import { InjectModel } from '@nestjs/mongoose';
@@ -11,10 +11,12 @@ import { UserService } from 'src/user/user.service';
 @Injectable()
 export class MailerService {
   private readonly logger = new Logger('mailer');
-  constructor( @InjectModel(User.name) private  userModel: Model<UserDocument>,private jwtService: JwtService,
-  @Inject(UserService)
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private jwtService: JwtService,
+    @Inject(UserService)
     private readonly userService: UserService,
-   ) {}
+  ) {}
 
   /**
    * @Todo : remove duplicate code from account.service.ts for jwt
@@ -24,25 +26,22 @@ export class MailerService {
     return token;
   }
 
-  async verifyJwt(token: string) {
+  /**
+   * Fuction to verify a user by jwt mechanism
+   * @param token string | JWT token sent to user in email, received as url param
+   */
+  async checkVerificationToken(token: string) {
     try {
+      this.logger.verbose(`Token received ${token}`);
       const isValidToken = await this.jwtService.verifyAsync(token, confirmEmailTokenConstants);
-      this.logger.verbose(isValidToken)
-      this.updateVerifiedStatus(isValidToken)
-       return isValidToken;
+      this.logger.verbose(`IsValidToken=${isValidToken}`);
+      const updatedUser = await this.userModel.findByIdAndUpdate(isValidToken.id, { verified: true });
+      this.logger.verbose(`Updated User`, JSON.stringify(updatedUser));
+      return isValidToken;
     } catch (e) {
       throw new UnauthorizedException(`invalid access`);
     }
   }
-
-  async updateVerifiedStatus(isValidToken){
-    try {
-     
-      const update = await this.userModel.findByIdAndUpdate(isValidToken.id,{verified: true})
-    } catch (e) {
-      throw Error(`Not found`);
-    }
-   }
 
   async sendEmail(email: string) {
     const transporter = nodemailer.createTransport({
@@ -60,10 +59,10 @@ export class MailerService {
 
     const mailDetails = await transporter.sendMail({
       from: 'ultimateraze011@gmail.com', // sender address
-    to: email, // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
-    html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`, // html body
+      to: email, // list of receivers
+      subject: 'Hello ✔', // Subject line
+      text: 'Hello world?', // plain text body
+      html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`, // html body
     });
   }
 
@@ -83,10 +82,10 @@ export class MailerService {
 
     const mailDetails = await transporter.sendMail({
       from: 'ultimateraze011@gmail.com', // sender address
-    to: email, // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
-    html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`, // html body
+      to: email, // list of receivers
+      subject: 'Hello ✔', // Subject line
+      text: 'Hello world?', // plain text body
+      html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`, // html body
     });
   }
 }
