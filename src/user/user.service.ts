@@ -11,6 +11,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from 'src/auth/dto/login.dto';
 import { Application } from 'src/application/application.schema';
+import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
 
 /**
  * **User Service**
@@ -66,6 +67,25 @@ export class UserService {
     } catch (e) {
       throw new ConflictException(e.message);
     }
+  }
+
+
+
+  
+  async request(requestPasswordResetDto: RequestPasswordResetDto): Promise<User> {
+    const { email} = requestPasswordResetDto;
+    this.logger.verbose(email,"PPPPPPPPPPPPPPPPP")
+
+    const user = await this.userModel.findOne({ collegeEmail: email }).select('collegeEmail');
+  if (user === null) {
+    this.logger.verbose(user)
+    throw new NotFoundException('user not found');
+  }
+  else{
+    this.logger.verbose(user,"not empty")
+
+    return user
+  }
   }
 
   async pushApplicationIntoUserParticipantList(application: Application, user: User) {

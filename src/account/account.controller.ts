@@ -10,6 +10,7 @@ import { ApplicationService } from 'src/application/application.service';
 import { AccessUserDetailsDto } from './dto/access-user-details.dto';
 import { MailerService } from 'src/mailer/mailer.service';
 import { findConfigFile } from 'typescript';
+import { RequestPasswordResetDto } from 'src/user/dto/request-password-reset.dto';
 
 @Controller('account')
 export class AccountController {
@@ -183,8 +184,7 @@ export class AccountController {
    * Page to receive verification callback from email
    */
   @Get('/register/verify/:token')
-  
-    
+ 
   async showRegisterSuccessPage(@Res() res: Response, @Param('token') token: string) {
     try {
       this.mailerService.verifyJwt((token))
@@ -209,7 +209,7 @@ export class AccountController {
           message: 'please check your email for verification link',
         },
       };
-      this.mailerService.sendEmail(response.collegeEmail,response.collegeEmail)
+      this.mailerService.sendEmail(response.collegeEmail)
       return res.render('account/register', templateData);
     } catch (e) {
       const templateData = {
@@ -218,4 +218,32 @@ export class AccountController {
       return res.render('account/register', templateData);
     }
   }
+  @Post('/password/request')
+  @UsePipes(ValidationPipe)
+  // ***Not entering this post request *****************************************************************************************************
+  async processRequestPage(@Res() res: Response, @Body() requestPasswordResetDto: RequestPasswordResetDto) {
+    this.logger.verbose("entered post req")
+    try {
+      this.logger.verbose("entered post req try block")
+
+      const response = await this.userService.request(requestPasswordResetDto);
+      this.logger.verbose(response)
+      const templateData = {
+        server: {
+          message: 'please check your email for password reset link',
+        },
+      };
+      this.mailerService.sendPasswordResetLink(response.collegeEmail)
+      return res.render('account/login', templateData);
+    } catch (e) {
+      const templateData = {
+        server: e.response,
+      };
+      return res.render('account/login', templateData);
+    }
+  }
 }
+
+
+
+
