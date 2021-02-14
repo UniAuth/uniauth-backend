@@ -6,9 +6,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import { Application } from 'src/application/application.schema';
 import { Document } from 'mongoose';
-
-export type UserDocument = User & Document; 
-
+export type UserDocument = User & Document;
 @Schema()
 export class User {
   constructor(partial: Partial<User>) {

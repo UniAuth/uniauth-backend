@@ -64,6 +64,9 @@ The user sees the following screen when during login
   - Inside [Handlebar](https://handlebarsjs.com/)
 - Database 
   - [MongoDB](https://docs.mongodb.com/) via [Mongoose](https://mongoosejs.com/)
+<<<<<<< HEAD
   
   
 
+=======
+>>>>>>> 76bf7e4daeaea85da6626c46a3b7e97318ac9e59
