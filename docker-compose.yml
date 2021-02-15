@@ -1,0 +1,13 @@
+version: '1'
+services:
+  uniauth:
+  build: .
+  image: uniauth:1
+  ports: 80:80
+  environment: V_PORT="${PORT}"
+    V_NODE_ENV="${NODE_ENV}"
+    V_DB_HOST="${DB_HOST}"
+    V_DB_USERNAME="${DB_USERNAME}"
+    V_DB_PASSWORD="${DB_PASSWORD}"
+    V_DB_NAME="${DB_NAME}"
+    V_API_ENDPOINT="${API_ENDPOINT}"
