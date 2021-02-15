@@ -6,11 +6,7 @@ LABEL maintainer="Yash Kumar Verma yk.verma2000@gmail.com"
 # Document environment configurations
 ENV PORT=80
 ENV NODE_ENV='production'
-ENV DB_HOST='localhost'
-ENV DB_USERNAME='postgres'
-ENV DB_PASSWORD='postgres'
-ENV DB_NAME='reverse_coding'
-ENV API_ENDPOINT='api'
+
 
 # Create Directory for the Container
 WORKDIR /usr/src/app
