@@ -268,4 +268,8 @@ export class AccountController {
       return res.render('account/register', templateData);
     }
   }
+ 
+
+  
+
 }
