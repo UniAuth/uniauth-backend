@@ -1,4 +1,16 @@
-import { Body, Controller, Get, Inject, Logger, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Logger,
+  Param,
+  Post,
+  Query,
+  Res,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { IncomingAuthDto, IncomingAuthLoginDto } from './dto/incoming-auth.dto';
 import { AccountService } from './account.service';
@@ -8,6 +20,10 @@ import { AuthService } from 'src/auth/auth.service';
 import { CreateUserDtoWithCaptcha } from 'src/user/dto/create-user.dto';
 import { ApplicationService } from 'src/application/application.service';
 import { AccessUserDetailsDto } from './dto/access-user-details.dto';
+import { MailerService } from 'src/mailer/mailer.service';
+import { findConfigFile } from 'typescript';
+import { RequestPasswordResetDto } from 'src/user/dto/request-password-reset.dto';
+import { ResetPasswordDto } from 'src/user/dto/reset-password.dto';
 
 @Controller('account')
 export class AccountController {
@@ -18,6 +34,7 @@ export class AccountController {
     @Inject(UserService) private readonly userService: UserService,
     @Inject(AuthService) private readonly authService: AuthService,
     @Inject(ApplicationService) private readonly applicationService: ApplicationService,
+    @Inject(MailerService) private readonly mailerService: MailerService,
   ) {}
 
   /**
@@ -154,12 +171,56 @@ export class AccountController {
     }
   }
 
-  @Get('/password/reset')
-  async showPasswordResetPage(@Res() res: Response) {
+
+  @Post('/password/request')
+  @UsePipes(ValidationPipe)
+  // ***Not entering this post request *****************************************************************************************************
+  async processRequestPage(@Res() res: Response, @Body() requestPasswordResetDto: RequestPasswordResetDto) {
     try {
+
+      const response = await this.userService.request(requestPasswordResetDto);
+      const templateData = {
+        server: {
+          message: 'please check your email for password reset link',
+        },
+      };
+      this.mailerService.sendPasswordResetLink(response.collegeEmail)
+      return res.render('account/login', templateData);
+    } catch (e) {
+      const templateData = {
+        server: e.response,
+      };
+      return res.render('account/login', templateData);
+    }
+  }
+
+  @Get('/password/reset/:token')
+  async showPasswordResetPage(@Res() res: Response, @Param('token') token: string) {
+    try {
+      this.mailerService.checkPasswordResetToken(token)
       return res.render('password/reset');
     } catch (e) {
       return res.render('error', e.response);
+    }
+  }
+
+
+  @Post('/password/reset/:token')
+  async processResetPage(@Res() res: Response,@Param('token') token: string, @Body() resetPasswordDto: ResetPasswordDto) {
+    try {
+     const isValidToken = await this.mailerService.checkPasswordResetToken(token)
+      const response = await this.userService.reset(resetPasswordDto,isValidToken);
+      const templateData = {
+        server: {
+          message: 'please check your email for verification link',
+        },
+      };
+      return res.render('account/register', templateData);
+    } catch (e) {
+      const templateData = {
+        server: e.response,
+      };
+      return res.render('account/register', templateData);
     }
   }
 
@@ -178,9 +239,10 @@ export class AccountController {
   /**
    * Page to receive verification callback from email
    */
-  @Get('/register/verify')
-  async showRegisterSuccessPage(@Res() res: Response) {
+  @Get('/register/verify/:token')
+  async showRegisterSuccessPage(@Res() res: Response, @Param('token') token: string) {
     try {
+      this.mailerService.checkVerificationToken(token);
       return res.render('account/register/verify');
     } catch (e) {
       return res.render('error', e.response);
@@ -188,11 +250,7 @@ export class AccountController {
   }
 
   @Post('/register')
-  @UsePipes(
-    new ValidationPipe({
-      disableErrorMessages: false,
-    }),
-  )
+  @UsePipes(ValidationPipe)
   async processRegisterPage(@Res() res: Response, @Body() createUserDtoWithCaptcha: CreateUserDtoWithCaptcha) {
     try {
       const response = await this.userService.create(createUserDtoWithCaptcha);
@@ -201,6 +259,7 @@ export class AccountController {
           message: 'please check your email for verification link',
         },
       };
+      this.mailerService.sendEmail(response.collegeEmail);
       return res.render('account/register', templateData);
     } catch (e) {
       const templateData = {
@@ -209,4 +268,8 @@ export class AccountController {
       return res.render('account/register', templateData);
     }
   }
+ 
+
+  
+
 }
