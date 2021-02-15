@@ -91,7 +91,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   async showEditForm(@Request() req,@Res() res: Response,@Param('id') id: string){
     const user = await this.userService.findOneById(id);
-    return res.render('profile/edit.hbs',{user})
+    return res.render('profile/edit.hbs',{ user })
   }
 
   @Post('/:id/edit')
