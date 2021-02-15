@@ -5,7 +5,7 @@ LABEL maintainer="Yash Kumar Verma yk.verma2000@gmail.com"
 
 # Document environment configurations
 ENV PORT=80
-ENV NODE_ENV='production'
+ENV database ='mongodb://127.0.0.1:27017/authentico'
 
 
 # Create Directory for the Container
