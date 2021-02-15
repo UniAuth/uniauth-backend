@@ -174,7 +174,6 @@ export class AccountController {
 
   @Post('/password/request')
   @UsePipes(ValidationPipe)
-  // ***Not entering this post request *****************************************************************************************************
   async processRequestPage(@Res() res: Response, @Body() requestPasswordResetDto: RequestPasswordResetDto) {
     try {
 
@@ -212,10 +211,10 @@ export class AccountController {
       const response = await this.userService.reset(resetPasswordDto,isValidToken);
       const templateData = {
         server: {
-          message: 'please check your email for verification link',
+          message: 'password changed successfully',
         },
       };
-      return res.render('account/register', templateData);
+      return res.render('account/login', templateData);
     } catch (e) {
       const templateData = {
         server: e.response,
