@@ -11,6 +11,8 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from 'src/auth/dto/login.dto';
 import { Application } from 'src/application/application.schema';
+import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 /**
  * **User Service**
@@ -39,6 +41,7 @@ export class UserService {
     if (user === null) {
       throw new NotFoundException('user not found');
     }
+   
 
     const hashCheck = await bcrypt.compareSync(password, user.password);
     if (hashCheck === true) {
@@ -65,6 +68,35 @@ export class UserService {
     } catch (e) {
       throw new ConflictException(e.message);
     }
+  }
+
+
+
+  
+  async request(requestPasswordResetDto: RequestPasswordResetDto): Promise<User> {
+    const { email} = requestPasswordResetDto;
+
+    const user = await this.userModel.findOne({ collegeEmail: email }).select('collegeEmail');
+  if (user === null) {
+    throw new NotFoundException('user not found');
+  }
+  else{
+    return user
+  }
+  }
+
+
+
+  async reset(resetPasswordDto: ResetPasswordDto,isValidToken): Promise<User> {
+    let { password_1,password_2} = resetPasswordDto;
+    password_1 = await bcrypt.hashSync(password_1, 10)
+    const user = await this.userModel.findOneAndUpdate(isValidToken.id,{password : password_1});
+    if (user === null) {
+    throw new NotFoundException('user not found');
+  }
+  else{
+    return user;
+  }
   }
 
   async pushApplicationIntoUserParticipantList(application: Application, user: User) {
