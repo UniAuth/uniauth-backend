@@ -1,14 +1,10 @@
-import { Controller, Get, Patch, Param, Body, Logger, Res, UseGuards, Request, Inject } from '@nestjs/common';
-import { DashboardService } from './dashboard.service';
+import { Controller, Get, Logger, Res, UseGuards, Request, Inject } from '@nestjs/common';
 import { Response } from 'express';
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
-import { UserService } from 'src/user/user.service';
-import { AuthorizedUser } from 'src/user/interface/user.interface';
-import { LoggedInUser } from 'src/auth/interface/loggedInUser.interface';
-import { SCOPE } from 'src/account/minions/scopeMapper.minion';
-import { ApplicationModule } from 'src/application/application.module';
-import { ApplicationService } from 'src/application/application.service';
-import { RegistrationNumber } from 'src/auxiliary/validators/registrationNumber.validator';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { UserService } from '../user/user.service';
+import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
+import { SCOPE } from '../account/minions/scopeMapper.minion';
+import { ApplicationService } from '../application/application.service';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -16,7 +12,6 @@ export class DashboardController {
 
   /** initialize dashboard module */
   constructor(
-    private readonly dashboardService: DashboardService,
     @Inject(UserService) private readonly userService: UserService,
     @Inject(ApplicationService) private readonly applicationService: ApplicationService,
   ) {
@@ -53,11 +48,13 @@ export class DashboardController {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.userService.findOneById(loggedInUser.id);
     const applications = await this.applicationService.findAllByParticipant(user);
-    return res.render('dashboard/data.hbs', { user, 
+    return res.render('dashboard/data.hbs', {
+      user,
       app: {
-      scope: SCOPE,
-      items: applications,
-    }, });
+        scope: SCOPE,
+        items: applications,
+      },
+    });
   }
 
   /**

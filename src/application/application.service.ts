@@ -4,14 +4,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Application, ApplicationDocument } from './application.schema';
 import { isValidObjectId, Model } from 'mongoose';
 import { v4 as generateUUID } from 'uuid';
-import { User } from 'src/user/user.schema';
-import { LoggedInUser } from 'src/auth/interface/loggedInUser.interface';
+import { User } from '../user/user.schema';
+import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 
 @Injectable()
 export class ApplicationService {
   private readonly logger = new Logger('application');
 
-  // private readonly applicationRepository: UserRepository,
   constructor(@InjectModel(Application.name) private applicationModel: Model<ApplicationDocument>) {}
 
   async create(createApplicationDto: CreateApplicationDto, authorizedUser: LoggedInUser): Promise<Application> {

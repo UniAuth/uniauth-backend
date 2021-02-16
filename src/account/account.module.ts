@@ -1,10 +1,11 @@
 import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
-import { ApplicationModule } from 'src/application/application.module';
-import { AuthModule } from 'src/auth/auth.module';
+import { ApplicationModule } from '../application/application.module';
+import { AuthModule } from '../auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { MailerModule } from '../mailer/mailer.module';
 import { Module } from '@nestjs/common';
-import { UserModule } from 'src/user/user.module';
+import { UserModule } from '../user/user.module';
 import { accessTokenJwtConstants } from './constants/access_token.constants';
 
 @Module({
@@ -16,6 +17,7 @@ import { accessTokenJwtConstants } from './constants/access_token.constants';
     ApplicationModule,
     UserModule,
     AuthModule,
+    MailerModule,
   ],
   controllers: [AccountController],
   providers: [AccountService],

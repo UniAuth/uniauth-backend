@@ -1,18 +1,85 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from './user.service';
+import * as mongooseUniquevalidator from 'mongoose-unique-validator';
 
-describe('UserService', () => {
+import { MongooseModule, getModelToken } from '@nestjs/mongoose';
+import { User, UserDocument, UserSchema } from './user.schema';
+
+import { Model } from 'mongoose';
+import { Test } from '@nestjs/testing';
+import { TestingModule } from '@nestjs/testing/testing-module';
+import { UserService } from './user.service';
+import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
+
+const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
+  name: mock.name || 'some user',
+  batch: mock.batch || '19',
+  branch: mock.branch || 'BCE',
+  personalEmail: mock.personalEmail || 'someone@example.com',
+  collegeEmail: mock.collegeEmail || 'someoe@edu.in',
+});
+
+// const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
+//   name: mock.name || 'some user',
+//   batch: mock.batch || '19',
+//   branch: mock.branch || 'BCE',
+//   personalEmail: mock.personalEmail || 'someone@example.com',
+//   collegeEmail: mock.collegeEmail || 'someoe@edu.in',
+// });
+
+/** mocking definitions */
+describe('User Service', () => {
+  let testingModule: TestingModule;
   let service: UserService;
+  let model: Model<UserDocument>;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [UserService],
+    testingModule = await Test.createTestingModule({
+      imports: [
+        rootMongooseTestModule(),
+        MongooseModule.forFeatureAsync([
+          {
+            name: 'User',
+            useFactory: () => {
+              const schema = UserSchema;
+              schema.plugin(mongooseUniquevalidator);
+              return schema;
+            },
+          },
+        ]),
+      ],
+      providers: [
+        UserService,
+        {
+          provide: getModelToken(User.name),
+          useValue: {
+            findOne: jest.fn().mockResolvedValue(mockUser()),
+            save: jest.fn().mockResolvedValue(mockUser()),
+            findOneAndUpdate: jest.fn().mockResolvedValue(mockUser()),
+            find: jest.fn().mockResolvedValue([mockUser(), mockUser()]),
+          },
+        },
+      ],
     }).compile();
 
-    service = module.get<UserService>(UserService);
+    service = testingModule.get<UserService>(UserService);
+    model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  /** procedure to follow for testing individual service methods */
+  describe('.login()', () => {
+    it('should be defined', () => {
+      expect(service.login).toBeDefined();
+    });
+
+    // it('should login user into system', async () => {
+    //   console.log(mockModel);
+    // });
   });
 });

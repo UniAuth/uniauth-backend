@@ -1,15 +1,15 @@
 import { BadRequestException, Inject, Logger, UnauthorizedException } from '@nestjs/common';
-import { ApplicationService } from 'src/application/application.service';
+import { ApplicationService } from '../application/application.service';
 import { JwtService } from '@nestjs/jwt';
 import { accessTokenJwtConstants } from './constants/access_token.constants';
 import { IncomingAuthDto, IncomingAuthLoginDto } from './dto/incoming-auth.dto';
 import { Injectable } from '@nestjs/common';
-import { Application } from 'src/application/application.schema';
+import { Application } from '../application/application.schema';
 import { scopeMapper } from './minions/scopeMapper.minion';
-import { UserService } from 'src/user/user.service';
-import { User } from 'src/user/user.schema';
+import { UserService } from '../user/user.service';
+import { User } from '../user/user.schema';
 import { AccessUserDetailsDto } from './dto/access-user-details.dto';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class AccountService {

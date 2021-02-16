@@ -1,7 +1,7 @@
 import * as mongooseUniquevalidator from 'mongoose-unique-validator';
 
 import { Application, ApplicationSchema } from './application.schema';
-import { User, UserSchema } from 'src/user/user.schema';
+import { User, UserSchema } from '../user/user.schema';
 
 import { ApplicationController } from './application.controller';
 import { ApplicationService } from './application.service';

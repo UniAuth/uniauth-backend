@@ -1,20 +1,16 @@
 import * as mongooseUniquevalidator from 'mongoose-unique-validator';
 
-import { User, UserSchema } from './user.schema';
-
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserController } from './user.controller';
-import { UserRepository } from './user.repository';
-import {DashboardModule} from 'src/dashboard/dashboard.module'
+import { UserSchema } from './user.schema';
 import { UserService } from './user.service';
 
 @Module({
   imports: [
-    forwardRef(() => DashboardModule),
     MongooseModule.forFeatureAsync([
       {
-        name: User.name,
+        name: 'User',
         useFactory: () => {
           const schema = UserSchema;
           schema.plugin(mongooseUniquevalidator);
@@ -25,7 +21,7 @@ import { UserService } from './user.service';
     
   ],
   controllers: [UserController],
-  providers: [UserService, UserRepository],
+  providers: [UserService],
   exports: [UserService],
 })
 export class UserModule {}

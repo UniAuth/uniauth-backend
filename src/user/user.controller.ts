@@ -3,11 +3,8 @@ import {
   Get,
   Post,
   Body,
-  Put,
-  Patch,
   Param,
   Delete,
-  Logger,
   UsePipes,
   ValidationPipe,
   UseGuards,
@@ -22,9 +19,8 @@ import {DashboardController} from '../dashboard/dashboard.controller'
 import { response, Response } from 'express';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { AuthorizedUser } from './interface/user.interface';
 
 /**
@@ -43,8 +39,7 @@ import { AuthorizedUser } from './interface/user.interface';
 @UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
-  private readonly logger = new Logger('user');
-  constructor(private readonly userService: UserService , @Inject(DashboardController) private readonly DashboardController: DashboardController) {}
+  constructor(private readonly userService: UserService) {}
 
   /**
    * Responds to: _POST(`/`)_
@@ -83,24 +78,24 @@ export class UserController {
    *
    * To update details of user
    */
-   /**
+  /**
    * To load edit form
    */
-  @Get('/:id/edit')
+  //   @todo: migrate to dashboard
+  //   @Get('/:id/edit')
+  //   @UseGuards(JwtAuthGuard)
+  //   async showEditForm(@Res() res: Response, @Param('id') id: string) {
+  //     const user = await this.userService.findOneById(id);
+  //     return res.render('profile/edit.hbs', { user });
+  //   }
 
-  @UseGuards(JwtAuthGuard)
-  async showEditForm(@Request() req,@Res() res: Response,@Param('id') id: string){
-    const user = await this.userService.findOneById(id);
-    return res.render('profile/edit.hbs',{ user })
-  }
-
-  @Post('/:id/edit')
-
-  @UseGuards(JwtAuthGuard)
-  async PostEditForm(@Body() updateUserDto: UpdateUserDto, @Request() req,@Res() res: Response,@Param('id') id: string){
-    const user = await this.userService.update(id, updateUserDto);
-    return res.redirect('/dashboard/')
-  }
+  //   @Post('/:id/edit')
+  //   @UseGuards(JwtAuthGuard)
+  //   async PostEditForm(
+  //     @Res() res: Response,
+  //   ) {
+  //     return res.redirect('/dashboard/');
+  //   }
 
   /**
    * Responds to: _DELETE(`/:id`)_

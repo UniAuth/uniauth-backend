@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, MaxLength, MinLength, Validate } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
-import { RegistrationNumber } from 'src/auxiliary/validators/registrationNumber.validator';
+import { RegistrationNumber } from '../../auxiliary/validators/registrationNumber.validator';
 
 /**
  * **Create User DTO**

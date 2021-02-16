@@ -6,6 +6,8 @@
 The detailed objective is available on the [/UniAuth](https://github.com/UniAuth/UniAuth) repository. 
 
 ---
+## Docs
+- Code Documentation: [Compodocs](http://uniauth.surge.sh/)
 
 ## Running on Local System
 Running the project on local system is **strongly recommended**, even if you are not working on the backend. This is becuase to test the middlewars, client applications, or any other component, an instance of UniAuth OAuth server is required. Make sure that you have a mongodb instance running. This step might be different depending on your installation type. If you do not have mongodb database installed, refer [this link](https://docs.mongodb.com/manual/administration/install-community/)
@@ -26,7 +28,7 @@ There are some validations in the system , so kindly follow the following format
 Format for registration number : [2 digit year][3 character code][4 digit number]     
 Example: 19BCE2669, 19MIT0001, 20BTC0010 etc.
 
-![Registration page](https://i.imgur.com/O8mFfss.png)
+![Registration page](https://i.imgur.com/m0LFVtq.png)
 
 - The page will ask you to _please check your email for verification link_. The email part is not integrated yet. So nothing to be done here. Head towards login and use the email and password you used to register right now.
 - Once logged in, you will see your dashboard. **Please note that these are placeholder images only**.
@@ -46,7 +48,7 @@ Example: 19BCE2669, 19MIT0001, 20BTC0010 etc.
 
 ## Consent Screen
 The user sees the following screen when during login
-![Simple Consent Screen for event](https://i.imgur.com/Sv9DE6S.png) 
+![Simple Consent Screen for event](https://i.imgur.com/r2fve6v.png) 
 
 
 ## Technologies Used
@@ -62,4 +64,3 @@ The user sees the following screen when during login
   - Inside [Handlebar](https://handlebarsjs.com/)
 - Database 
   - [MongoDB](https://docs.mongodb.com/) via [Mongoose](https://mongoosejs.com/)
-

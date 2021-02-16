@@ -1,7 +1,7 @@
 import { Injectable, UseFilters } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { MongoExceptionFilter } from 'src/auxiliary/exceptions/mongo.exceptions';
+import { MongoExceptionFilter } from '../auxiliary/exceptions/mongo.exceptions';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './user.schema';
 

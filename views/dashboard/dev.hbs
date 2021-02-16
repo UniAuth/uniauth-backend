@@ -30,6 +30,10 @@
     .inputWithIcon button :hover {
         color: #212121;
     }
+
+    .del :hover {
+        color: red;
+    }
 </style>
 
 <body>
@@ -57,14 +61,23 @@
             <button id="newApplicationButton" class="mr-16 font-bold p-3 bordered hover:text-blue-700 ">+ New
                 Application</button>
         </div>
+
         <div class="container px-8 pt-10 mx-auto lg:px-4">
             <div class="flex flex-wrap text-center">
+                {{#each app.items}}
                 {{!-- application cards loop start --}}
                 {{!-- first application card start --}}
-                {{#each app.items}}
                 <div class="px-2 py-6 mx-auto lg:w-1/3 md:w-full">
                     <div class="p-4 border rounded-xl">
                         <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> {{name}}
+                            <button style="float: right" onclick="delitem(" {{_id}}")">
+                                <svg xmlns="http://www.w3.org/2000/svg" width=" 30" height="24px" viewBox="0 0 20 20"
+                                    fill="#d11a2a">
+                                    <path fill-rule="evenodd"
+                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">{{description}}
                         </p>
@@ -77,10 +90,10 @@
                             <p>
                                 <div class="inputWithIcon">
 
-                                    <input type="text" placeholder="Client ID" id="p1" value="{{_id}}" readonly
+                                    <input type="text" placeholder="Client ID" id="I1" value="{{_id}}" readonly
                                         class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
                                     </input>
-                                    <button onclick="copyToClipboard('p1')">
+                                    <button onclick="copyToClipboard(I1)">
                                         <svg width=" 30" height="24px" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -100,9 +113,9 @@
                                 <small>Client Secret</small>
                             </p>
                             <div class="inputWithIcon">
-                                <input type="text" placeholder="Client Secret" id="p2" value="{{clientSecret}}" readonly
+                                <input type="text" placeholder="Client Secret" id="I2" value="{{clientSecret}}" readonly
                                     class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
-                                <button onclick="copyToClipboard('p2')">
+                                <button onclick="copyToClipboard(I2)">
                                     <svg width=" 30" height="24px" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -121,10 +134,10 @@
                             </p>
                             {{#each authorizedRedirect}}
                             <div class="inputWithIcon">
-                                <input type="text" id="p3" placeholder="Client Secret" value="{{this}}" readonly
+                                <input type="text" id="I3" placeholder="Client Secret" value="{{this}}" readonly
                                     class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
                                 {{/each}}
-                                <button onclick="copyToClipboard('#p3')">
+                                <button onclick="copyToClipboard(I3)">
                                     <svg width=" 30" height="24px" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -156,6 +169,8 @@
             </div>
         </div>
     </section>
+
+
     <section class="text-gray-700 body-font mt-20 mb-12" id="newApplicationSection" style="display: none;">
         <form action="" id="newApplicationForm">
             <div class="flex">
@@ -260,10 +275,14 @@
                     window.location.reload()
                 }
                 else {
-                    alert(`Error creating application, total ${json.message.length} errors.\n\n${json.message.map((m) => m)}`)
+                    alert(`Error creating application`)
+                    window.location.reload()
+
                 }
             })
     }
+
+
 
     /** handle form submission **/
     document.getElementById("newApplicationForm").addEventListener("submit", (e) => {
@@ -277,12 +296,19 @@
 
     /** to show new application block only on clicking the button **/
     document.getElementById("newApplicationButton").addEventListener("click", () => {
-        document.getElementById("newApplicationSection").style.display = "block"
+        document.getElementById("newApplicationSection").style.display = "block";
+        window.scrollTo(0, document.body.scrollHeight);
     })
 
     /** To copy to clip board **/
-
-
+    function copyToClipboard(input) {
+        var copyText = document.getElementById(input);
+        var copyText = input;
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
+    /**  Del item **/
 
 </script>
 
