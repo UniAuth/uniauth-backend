@@ -5,15 +5,10 @@ LABEL maintainer="Yash Kumar Verma yk.verma2000@gmail.com"
 
 # Document environment configurations
 ENV PORT=80
-ENV NODE_ENV='production'
-ENV DB_HOST='localhost'
-ENV DB_USERNAME='postgres'
-ENV DB_PASSWORD='postgres'
-ENV DB_NAME='reverse_coding'
-ENV API_ENDPOINT='api'
+ENV database ='mongodb://127.0.0.1:27017/authentico'
 
 # Create Directory for the Container
-WORKDIR /usr/src/app
+WORKDIR /src/app
 
 # Only copy the package.json file to work directory
 COPY package.json .
@@ -22,12 +17,13 @@ COPY package.json .
 RUN npm install
 
 # Copy all other source code to work directory
-ADD . /usr/src/app
+ADD . /src/app
 
 # Build the project
 RUN npm run build
+RUN docker compose up
 
 # run the server
-CMD ["npm", "start"] 
+CMD ["npm", "start:dev"] 
 
 EXPOSE 80
