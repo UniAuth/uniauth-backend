@@ -42,11 +42,11 @@ describe('DashboardController', () => {
     service: module.get<UserService>(UserService);
   });
 
-  it('should be defined', async() => {
+  it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-  describe('.showDashboard()', async() => {
-    it('should be defined', async() => {
+  describe('.showDashboard()', () => {
+    it('should be defined', () => {
       expect(controller.showDashboard).toBeDefined();
     });
   });
