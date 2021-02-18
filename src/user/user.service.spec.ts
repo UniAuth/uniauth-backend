@@ -10,11 +10,11 @@ import { UserService } from './user.service';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 
 const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
-  name: mock.name || 'some user',
-  batch: mock.batch || '19',
-  branch: mock.branch || 'BCE',
-  personalEmail: mock.personalEmail || 'someone@example.com',
-  collegeEmail: mock.collegeEmail || 'someoe@edu.in',
+  name:'some user',
+  batch: '19',
+  branch: 'BCE',
+  personalEmail: 'someone@example.com',
+  collegeEmail: 'someoe@edu.in',
 });
 
 // const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
@@ -68,8 +68,8 @@ describe('User Service', () => {
     jest.clearAllMocks();
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('should be defined', async() => {
+    await expect(service).toBeDefined();
   });
 
   /** procedure to follow for testing individual service methods */
