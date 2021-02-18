@@ -9,20 +9,18 @@ import { MailerService } from './mailer.service';
 import * as config from 'config';
 import { UserService } from '../user/user.service';
 
-
-// const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
-//   name: mock.name || 'some user',
-//   batch: mock.batch || '19',
-//   branch: mock.branch || 'BCE',
-//   personalEmail: mock.personalEmail || 'someone@example.com',
-//   collegeEmail: mock.collegeEmail || 'someoe@edu.in',
-// });
+const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
+  name: 'some user',
+  batch: '19',
+  branch: 'BCE',
+  personalEmail: 'someone@example.com',
+  collegeEmail: 'someoe@edu.in',
+});
 
 describe('MailerService', () => {
   let testingModule: TestingModule;
   let service: MailerService;
   let model: Model<UserDocument>;
-
 
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
@@ -34,19 +32,20 @@ describe('MailerService', () => {
           signOptions: { expiresIn: confirmEmailTokenConstants.expiresIn },
         }),
       ],
-      providers: [MailerService,UserService,
-      //   {
-      //   provide: getModelToken(User.name),
-      //   useValue: {
-      //     findByIdAndUpdate: jest.fn().mockResolvedValue(mockUser()),
-      //   },
-      // },
-    ],
+      providers: [
+        MailerService,
+        UserService,
+        {
+          provide: getModelToken(User.name),
+          useValue: {
+            findByIdAndUpdate: jest.fn().mockResolvedValue(mockUser()),
+          },
+        },
+      ],
     }).compile();
 
     service = testingModule.get<MailerService>(MailerService);
     model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
-
   });
 
   it('should be defined', () => {
@@ -70,7 +69,7 @@ describe('MailerService', () => {
       expect(service.checkPasswordResetToken).toBeDefined();
     });
   });
-  
+
   describe('.sendEmail()', () => {
     it('should be defined', () => {
       expect(service.sendEmail).toBeDefined();
