@@ -2,18 +2,21 @@ import { JwtModule } from '@nestjs/jwt';
 import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Model } from 'mongoose';
-import { User, UserDocument, UserSchema } from 'src/user/user.schema';
-import { rootMongooseTestModule } from 'test-utils/MongooseTestModule';
+import { User, UserDocument, UserSchema } from '../user/user.schema';
+import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
 import { MailerService } from './mailer.service';
+import * as config from 'config';
+import { UserService } from '../user/user.service';
 
-const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
-  name: mock.name || 'some user',
-  batch: mock.batch || '19',
-  branch: mock.branch || 'BCE',
-  personalEmail: mock.personalEmail || 'someone@example.com',
-  collegeEmail: mock.collegeEmail || 'someoe@edu.in',
-});
+
+// const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
+//   name: mock.name || 'some user',
+//   batch: mock.batch || '19',
+//   branch: mock.branch || 'BCE',
+//   personalEmail: mock.personalEmail || 'someone@example.com',
+//   collegeEmail: mock.collegeEmail || 'someoe@edu.in',
+// });
 
 describe('MailerService', () => {
   let testingModule: TestingModule;
@@ -31,13 +34,14 @@ describe('MailerService', () => {
           signOptions: { expiresIn: confirmEmailTokenConstants.expiresIn },
         }),
       ],
-      providers: [MailerService,
-        {
-        provide: getModelToken(User.name),
-        useValue: {
-          findByIdAndUpdate: jest.fn().mockResolvedValue(mockUser()),
-        },
-      },],
+      providers: [MailerService,UserService,
+      //   {
+      //   provide: getModelToken(User.name),
+      //   useValue: {
+      //     findByIdAndUpdate: jest.fn().mockResolvedValue(mockUser()),
+      //   },
+      // },
+    ],
     }).compile();
 
     service = testingModule.get<MailerService>(MailerService);
