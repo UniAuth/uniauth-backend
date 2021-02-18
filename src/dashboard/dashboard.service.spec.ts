@@ -15,4 +15,31 @@ describe('DashboardService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('.create()', () => {
+    it('should be defined', () => {
+      expect(service.create).toBeDefined();
+    });
+  });
+  describe('.findAll()', () => {
+    it('should be defined', () => {
+      expect(service.findAll).toBeDefined();
+    });
+  });
+  describe('.findOne()', () => {
+    it('should be defined', () => {
+      expect(service.findOne).toBeDefined();
+    });
+  });
+  describe('.update()', () => {
+    it('should be defined', () => {
+      expect(service.update).toBeDefined();
+    });
+  });
+  describe('.remove()', () => {
+    it('should be defined', () => {
+      expect(service.remove).toBeDefined();
+    });
+  });
+
 });
