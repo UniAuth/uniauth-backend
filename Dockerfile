@@ -8,16 +8,17 @@ ENV PORT=80
 ENV database ='mongodb://127.0.0.1:27017/authentico'
 
 # Create Directory for the Container
-WORKDIR /src/app
+WORKDIR /app
 
 # Only copy the package.json file to work directory
-COPY package.json .
+COPY package.json /app
+
 
 # Install all Packages
 RUN npm install
 
 # Copy all other source code to work directory
-ADD . /src/app
+ADD . /app
 
 # Build the project
 RUN npm run build
