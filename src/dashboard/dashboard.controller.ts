@@ -78,9 +78,12 @@ export class DashboardController {
 
   @Post('/dev/:id')
   @UseGuards(JwtAuthGuard)
-  async delete(@Request() req, @Res() res: Response, @Param('id') id: String) {
+  async delete(@Request() req, @Res() res: Response, @Param('id') id: string) {
     const loggedInUser: LoggedInUser = req.user;
-    const action = await this.applicationService.delete(id, loggedInUser);
+    const user = await this.applicationService.findOneById(id);
+    if (JSON.stringify(user.admin) === JSON.stringify(loggedInUser.id)) {
+      const action = await this.applicationService.delete(id);
+    }
     res.redirect('/dashboard/dev');
   }
 }
