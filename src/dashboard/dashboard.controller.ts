@@ -77,8 +77,10 @@ export class DashboardController {
   }
 
   @Post('/dev/:id')
-  async deleteApp(@Res() res: Response, @Param('id') id: String) {
-    const action = await this.applicationService.deleteApplication(id);
+  @UseGuards(JwtAuthGuard)
+  async delete(@Request() req, @Res() res: Response, @Param('id') id: String) {
+    const loggedInUser: LoggedInUser = req.user;
+    const action = await this.applicationService.delete(id, loggedInUser);
     res.redirect('/dashboard/dev');
   }
 }

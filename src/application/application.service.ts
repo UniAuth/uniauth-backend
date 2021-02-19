@@ -33,8 +33,16 @@ export class ApplicationService {
     }
   }
 
-  async deleteApplication(id: String) {
-    const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
+  async delete(id: String, authorizedUser: LoggedInUser) {
+    try {
+      const user = await this.applicationModel.findById({ _id: id });
+      if (JSON.stringify(user.admin) === JSON.stringify(authorizedUser.id)) {
+        const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
+      }
+    } catch (e) {
+      this.logger.error(e);
+      throw new ConflictException(e.message);
+    }
   }
 
   findAll() {
