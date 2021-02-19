@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Res, UseGuards, Request, Inject } from '@nestjs/common';
+import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserService } from '../user/user.service';
@@ -74,5 +74,11 @@ export class DashboardController {
         items: applications,
       },
     });
+  }
+
+  @Post('/dev/:id')
+  async deleteApp(@Res() res: Response, @Param('id') id: String) {
+    const action = await this.applicationService.deleteApplication(id);
+    res.redirect('/dashboard/dev');
   }
 }

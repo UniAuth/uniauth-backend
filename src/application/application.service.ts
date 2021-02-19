@@ -33,6 +33,10 @@ export class ApplicationService {
     }
   }
 
+  async deleteApplication(id: String) {
+    const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
+  }
+
   findAll() {
     return this.applicationModel.find();
   }
