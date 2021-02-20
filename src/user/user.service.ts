@@ -89,12 +89,6 @@ export class UserService {
 
   async pushApplicationIntoUserParticipantList(application: Application, user: User) {
     try {
-      const result = await this.userModel.findOneAndUpdate(
-        { registrationNumber: user.registrationNumber },
-        {
-          $addToSet: { authorizedApplications: application },
-        },
-      );
       this.logger.verbose(`Added ${application.name} to ${user.name}`);
     } catch (e) {
       this.logger.verbose(`Error adding ${application.name} to ${user.name}`);

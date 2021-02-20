@@ -1,6 +1,5 @@
 import * as config from 'config';
 import * as cookieParser from 'cookie-parser';
-import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
 
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';

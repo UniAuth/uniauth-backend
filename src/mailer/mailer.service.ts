@@ -2,7 +2,7 @@ import { Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/commo
 import * as config from 'config';
 import * as nodemailer from 'nodemailer';
 import { JwtService } from '@nestjs/jwt';
-import { Model, ObjectId } from 'mongoose';
+import { Model } from 'mongoose';
 import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '../user/user.schema';

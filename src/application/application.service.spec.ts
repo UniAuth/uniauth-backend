@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Model, model } from 'mongoose';
+// import { Model } from 'mongoose';
 import { User, UserDocument, UserSchema } from '../user/user.schema';
 import { ApplicationService } from './application.service';
 import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 import * as mongooseUniquevalidator from 'mongoose-unique-validator';
-import { UserService } from '../user/user.service';
+// import { UserService } from '../user/user.service';
 import { Application, ApplicationSchema } from './application.schema';
 
 const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
@@ -19,7 +19,7 @@ const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
 describe('ApplicationService', () => {
   let testingModule: TestingModule;
   let service: ApplicationService;
-  let model: Model<UserDocument>;
+  // let model: Model<UserDocument>;
 
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
@@ -59,7 +59,7 @@ describe('ApplicationService', () => {
     }).compile();
 
     service = testingModule.get<ApplicationService>(ApplicationService);
-    model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
+    // model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   afterEach(() => {

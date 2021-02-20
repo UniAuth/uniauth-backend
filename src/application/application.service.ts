@@ -59,12 +59,6 @@ export class ApplicationService {
 
   async pushUserIntoApplicationParticipantList(application: Application, user: User) {
     try {
-      const result = await this.applicationModel.findOneAndUpdate(
-        { name: application.name },
-        {
-          $addToSet: { participants: user },
-        },
-      );
       this.logger.verbose(`Added ${user.name} to ${application.name}`);
     } catch (e) {
       this.logger.error(`Error adding ${user.name} to ${application.name}`);

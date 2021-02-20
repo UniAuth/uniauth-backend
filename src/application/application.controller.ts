@@ -13,7 +13,7 @@ import {
   NotFoundException,
   Logger,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+// import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 import { AuthorizedUser } from '../user/interface/user.interface';
