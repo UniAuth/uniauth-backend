@@ -10,7 +10,6 @@ import { AccountModule } from './account.module';
 describe('AccountService', () => {
   let testingModule: TestingModule;
   let service: AccountService;
-  // let model: Model<UserDocument>;
 
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
@@ -48,7 +47,6 @@ describe('AccountService', () => {
     }).compile();
 
     service = testingModule.get<AccountService>(AccountService);
-    // model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   it('should be defined', () => {
