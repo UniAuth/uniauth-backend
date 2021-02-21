@@ -19,7 +19,6 @@ const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
 describe('MailerService', () => {
   let testingModule: TestingModule;
   let service: MailerService;
-  // let model: Model<UserDocument>;
 
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
@@ -44,7 +43,6 @@ describe('MailerService', () => {
     }).compile();
 
     service = testingModule.get<MailerService>(MailerService);
-    // model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   it('should be defined', () => {
