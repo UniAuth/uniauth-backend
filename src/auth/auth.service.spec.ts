@@ -10,14 +10,6 @@ import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { newJWTConstants } from './constants/auth.constants';
 
-// const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
-//   name: 'some user',
-//   batch: '19',
-//   branch: 'BCE',
-//   personalEmail: 'someone@example.com',
-//   collegeEmail: 'someoe@edu.in',
-// });
-
 /** mocking definitions */
 describe('Auth Service', () => {
   let testingModule: TestingModule;
@@ -46,7 +38,6 @@ describe('Auth Service', () => {
     }).compile();
 
     service = testingModule.get<AuthService>(AuthService);
-    // model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   afterEach(() => {
