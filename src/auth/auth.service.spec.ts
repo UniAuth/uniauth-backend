@@ -14,7 +14,6 @@ import { newJWTConstants } from './constants/auth.constants';
 describe('Auth Service', () => {
   let testingModule: TestingModule;
   let service: AuthService;
-  // let model: Model<UserDocument>;
 
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
