@@ -88,4 +88,12 @@ export class ApplicationService {
 
     return result;
   }
+
+  async findPartcipantsById(id: string) {
+    const result = await this.applicationModel.findOne({ _id: id }, { participants: 1, _id: 0 });
+    if (result === null) {
+      throw new UnauthorizedException('Participants not found');
+    }
+    return result;
+  }
 }

@@ -130,6 +130,10 @@ export class UserService {
     return user;
   }
 
+  findMultipleById(participantsId) {
+    return this.userModel.find({ _id: { $in: participantsId } }, { name: 1 });
+  }
+
   remove(id: number) {
     return `This action removes a #${id} user`;
   }

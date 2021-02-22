@@ -86,4 +86,20 @@ export class DashboardController {
     }
     res.redirect('/dashboard/dev');
   }
+
+  @Get('/dev/details/:id')
+  // @UseGuards(JwtAuthGuard)
+  async showDetails(@Request() req, @Res() res: Response, @Param('id') id: string) {
+    const result = await this.applicationService.findPartcipantsById(id);
+    const userInfo = [];
+    result.participants.forEach((element) => {
+      userInfo.push(element);
+    });
+    const data = await this.userService.findMultipleById(userInfo);
+    return res.render('dashboard/details.hbs', {
+      data: {
+        userData: data,
+      },
+    });
+  }
 }
