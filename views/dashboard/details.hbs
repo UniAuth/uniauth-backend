@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/78133145?s=200&v=4">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+</head>
+<style>
+    table {
+        border-spacing: 1;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 100%;
+
+        position: relative;
+    }
+
+    table * {
+        position: relative;
+    }
+
+
+
+    table thead tr {
+        font-weight: bold;
+        font-size: 25px;
+        height: 60px;
+        background: #7354db;
+    }
+
+    tbody tr td {
+        font-size: 22px;
+    }
+
+    table tbody tr {
+        height: 50px;
+    }
+
+    table tbody tr:last-child {
+        border: 0;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f5f5f5;
+    }
+
+    tbody tr {
+        font-family: OpenSans-Regular;
+        font-size: 15px;
+        color: #808080;
+        line-height: 1.2;
+        font-weight: unset;
+    }
+
+    tbody tr:hover {
+        color: #555555;
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+
+    .card {
+
+        box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+
+    }
+</style>
+
+<body>
+    {{!-- dashboard header starts --}}
+    <header class="text-gray-700 bg-white border-t border-b body-font">
+        <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+            <a href="./" class="flex items-center w-40 font-medium text-gray-900 title-font md:mb-0">
+                <h1 class="text-2xl font-semibold tracking-tighter">UniAuth</h1>
+            </a>
+            <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto ">
+                <a href="profile" class="mr-5 text-sm text-gray-600 hover:text-gray-800">Profile</a>
+                <a href="data" class="mr-5 text-sm text-gray-600 hover:text-gray-800">My Data</a>
+                <a href="dev" class="mr-5 text-sm text-blue-700 font-semibold hover:text-gray-800">Dev Arena</a>
+            </nav>
+            <a href="./../account/logout"
+                class="items-center px-8 py-3 mt-4 text-sm text-gray-500 transition duration-500 ease-in-out transform bg-white rounded-lg lg:inline-flex lg:mt-px focus:ring focus:outline-none">Log
+                Out
+            </a>
+        </div>
+    </header>
+    {{!-- dashboard header ends --}}
+    <section class="text-gray-700 body-font mt-10">
+        <div class="flex justify-between">
+            <h1 class="text-2xl pl-10 font-semibold tracking-tighter">My Applications</h1>
+            <button id="newApplicationButton" class="mr-16 font-bold p-3 bordered hover:text-blue-700 ">+ New
+                Application</button>
+        </div>
+
+        <div class="container px-8 pt-10 mx-auto lg:px-4">
+            <div class="flex flex-wrap text-center">
+                <div class="px-2 py-6 mx-auto lg:w-1/3 md:w-full">
+                    <div class="p-4 border rounded-xl card">
+                        {{!-- <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> {{name}}
+                        </h2> --}}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><strong>S.N</strong> </th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data.userData}}
+                                <tr>
+                                    <td>{{@index}}</td>
+                                    <td>{{name}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+
+</body>
+<script src="../assets/js/util.js"></script>
+
+
+</html>
