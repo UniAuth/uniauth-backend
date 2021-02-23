@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
 </head>
 <style>
+    h1 {
+        text-align: center;
+    }
+
     table {
         border-spacing: 1;
         border-collapse: collapse;
@@ -17,15 +21,12 @@
         border-radius: 10px;
         overflow: hidden;
         width: 100%;
-
         position: relative;
     }
 
     table * {
         position: relative;
     }
-
-
 
     table thead tr {
         font-weight: bold;
@@ -65,9 +66,7 @@
     }
 
     .card {
-
         box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
-
     }
 </style>
 
@@ -91,10 +90,8 @@
     </header>
     {{!-- dashboard header ends --}}
     <section class="text-gray-700 body-font mt-10">
-        <div class="flex justify-between">
-            <h1 class="text-2xl pl-10 font-semibold tracking-tighter">My Applications</h1>
-            <button id="newApplicationButton" class="mr-16 font-bold p-3 bordered hover:text-blue-700 ">+ New
-                Application</button>
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tighter">Logged In Users</h1>
         </div>
 
         <div class="container px-8 pt-10 mx-auto lg:px-4">
