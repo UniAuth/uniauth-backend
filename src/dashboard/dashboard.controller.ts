@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post } from '@nestjs/common';
+import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post, Req } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserService } from '../user/user.service';
@@ -76,7 +76,6 @@ export class DashboardController {
     });
   }
 
-
   @Post('/dev/:id')
   @UseGuards(JwtAuthGuard)
   async delete(@Request() req, @Res() res: Response, @Param('id') id: string) {
@@ -86,5 +85,21 @@ export class DashboardController {
       const action = await this.applicationService.delete(id);
     }
     res.redirect('/dashboard/dev');
+  }
+
+  @Get('/testing')
+  @UseGuards(JwtAuthGuard)
+  async showUserList(@Request() req, @Res() res: Response) {
+    try {
+      const loggedInUser: LoggedInUser = req.user;
+      const userDetails = await this.applicationService.findUsers('600ee885924dd75267384cb5');
+      res.json({
+        data: userDetails,
+      });
+    } catch (e) {
+      res.json({
+        error: true,
+      });
+    }
   }
 }

@@ -33,7 +33,7 @@ export class ApplicationService {
     }
   }
 
-  async delete(id: String) {
+  async delete(id: string) {
     try {
       const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
     } catch (e) {
@@ -46,9 +46,10 @@ export class ApplicationService {
     return this.applicationModel.find();
   }
 
-  findUsers()
-  {
-    return this.applicationModel.find().populate('participants')
+  async findUsers(id: string) {
+    const data = await this.applicationModel.findOne({ _id: id }).populate('participants', 'name collegeEmail');
+    console.log(data);
+    return data;
   }
 
   async findOneById(id: string) {
