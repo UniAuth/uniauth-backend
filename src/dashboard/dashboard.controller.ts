@@ -92,14 +92,12 @@ export class DashboardController {
   async showUserList(@Request() req, @Res() res: Response, @Param('id') id: string) {
     try {
       const loggedInUser: LoggedInUser = req.user;
-      const userDetails = await this.applicationService.findUsers(id);
+      const userDetails = await this.applicationService.findUsersGrantedAccess(id);
       res.render('dashboard/details.hbs',{
         userDetails:userDetails.participants
       })
     } catch (e) {
-      res.json({
-        error: true,
-      });
+      res.render('error.hbs');
     }
   }
 }

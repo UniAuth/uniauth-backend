@@ -46,7 +46,7 @@ export class ApplicationService {
     return this.applicationModel.find();
   }
 
-  async findUsers(id: string) {
+  async findUsersGrantedAccess(id: string) {
     const data = await this.applicationModel.findOne({ _id: id }).populate('participants', 'name collegeEmail');
     return data;
   }
