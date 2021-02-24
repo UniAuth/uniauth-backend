@@ -108,10 +108,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each data.userData}}
+                                {{#each userDetails}}
                                 <tr>
                                     <td>{{@index}}</td>
-                                    <td>{{name}}</td>
+                                    <td>{{this.name}}</td>
                                 </tr>
                                 {{/each}}
                             </tbody>

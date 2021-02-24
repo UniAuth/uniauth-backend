@@ -48,7 +48,6 @@ export class ApplicationService {
 
   async findUsers(id: string) {
     const data = await this.applicationModel.findOne({ _id: id }).populate('participants', 'name collegeEmail');
-    console.log(data);
     return data;
   }
 

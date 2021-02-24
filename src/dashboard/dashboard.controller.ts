@@ -87,15 +87,15 @@ export class DashboardController {
     res.redirect('/dashboard/dev');
   }
 
-  @Get('/testing')
+  @Get('/dev/details/:id')
   @UseGuards(JwtAuthGuard)
-  async showUserList(@Request() req, @Res() res: Response) {
+  async showUserList(@Request() req, @Res() res: Response, @Param('id') id: string) {
     try {
       const loggedInUser: LoggedInUser = req.user;
-      const userDetails = await this.applicationService.findUsers('600ee885924dd75267384cb5');
-      res.json({
-        data: userDetails,
-      });
+      const userDetails = await this.applicationService.findUsers(id);
+      res.render('dashboard/details.hbs',{
+        userDetails:userDetails.participants
+      })
     } catch (e) {
       res.json({
         error: true,
