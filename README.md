@@ -6,8 +6,7 @@
 ![Docker Automated build](https://img.shields.io/docker/automated/UniAuth/uniauth-backend)
 
 # Authentico
-
-![Ensure Build](https://github.com/YashKumarVerma/authentico-backend/workflows/Ensure%20Build/badge.svg)
+![Ensure Build](https://github.com/UniAuth/uniauth-backend/workflows/Ensure%20Build/badge.svg)
 
 ## Objective
 The detailed objective is available on the [/UniAuth](https://github.com/UniAuth/UniAuth) repository. 
