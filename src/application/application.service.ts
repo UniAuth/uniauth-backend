@@ -33,9 +33,9 @@ export class ApplicationService {
     }
   }
 
-  async delete(id: String) {
+  async delete(id: string) {
     try {
-      const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
+      await this.applicationModel.findByIdAndDelete({ _id: id });
     } catch (e) {
       this.logger.error(e);
       throw new ConflictException(e.message);

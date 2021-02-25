@@ -3,7 +3,6 @@ import * as mongooseUniquevalidator from 'mongoose-unique-validator';
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { User, UserDocument, UserSchema } from './user.schema';
 
-import { Model } from 'mongoose';
 import { Test } from '@nestjs/testing';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { UserService } from './user.service';
@@ -16,7 +15,6 @@ const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
   personalEmail: 'someone@example.com',
   collegeEmail: 'someoe@edu.in',
 });
-
 // const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
 //   name: mock.name || 'some user',
 //   batch: mock.batch || '19',

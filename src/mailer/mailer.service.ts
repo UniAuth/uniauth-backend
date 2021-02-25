@@ -55,7 +55,7 @@ export class MailerService {
   }
 
   async sendEmail(email: string) {
-    const transporter = nodemailer.createTransport({
+    nodemailer.createTransport({
       host: config.get('nodemailer_config.host'),
       port: config.get('nodemailer_config.port'),
       secure: config.get('nodemailer_config.secure'),
@@ -67,14 +67,14 @@ export class MailerService {
 
     const token = await this.generateJwt({ email });
     const link = `http://localhost:5000/account/register/verify/${token}`;
-
-    const mailDetails = await transporter.sendMail({
-      from: 'ultimateraze011@gmail.com', // sender address
-      to: email, // list of receivers
-      subject: 'Hello ✔', // Subject line
-      text: 'Hello world?', // plain text body
-      html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`, // html body
-    });
+    console.log(link);
+    // const mailDetails = await transporter.sendMail({
+    //   from: 'ultimateraze011@gmail.com', // sender address
+    //   to: email, // list of receivers
+    //   subject: 'Hello ✔', // Subject line
+    //   text: 'Hello world?', // plain text body
+    //   html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`, // html body
+    // });
   }
 
   async sendPasswordResetLink(email: string) {
@@ -91,7 +91,7 @@ export class MailerService {
     const token = await this.generateJwt({ email });
     const link = `http://localhost:5000/account/password/reset/${token}`;
 
-    const mailDetails = await transporter.sendMail({
+    await transporter.sendMail({
       from: 'ultimateraze011@gmail.com', // sender address
       to: email, // list of receivers
       subject: 'Hello ✔', // Subject line

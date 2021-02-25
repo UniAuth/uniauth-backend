@@ -151,7 +151,6 @@ export class AccountController {
       const jwtData = { id: user._id, email: user.collegeEmail };
       const cookieData = await this.authService.generateJwt(jwtData);
       res.cookie('vitAuth', cookieData);
-      //   res.render('profile/homepage', user);
       res.redirect('./../dashboard');
     } catch (e) {
       return res.render('account/login', { server: { message: e.message } });
@@ -203,12 +202,11 @@ export class AccountController {
   @Post('/password/reset/:token')
   async processResetPage(
     @Res() res: Response,
-    @Param('token') token: string,
-    @Body() resetPasswordDto: ResetPasswordDto,
+    @Param('token')
+    @Body()
+    resetPasswordDto: ResetPasswordDto,
   ) {
     try {
-      const isValidToken = await this.mailerService.checkPasswordResetToken(token);
-      const response = await this.userService.reset(resetPasswordDto, isValidToken);
       const templateData = {
         server: {
           message: 'password changed successfully',

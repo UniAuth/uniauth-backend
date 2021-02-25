@@ -1,6 +1,3 @@
-import { getModelToken } from '@nestjs/mongoose';
-import { User, UserDocument } from '../user/user.schema';
-import { Model } from 'mongoose';
 import { Test } from '@nestjs/testing';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { AuthService } from './auth.service';
@@ -10,19 +7,10 @@ import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { newJWTConstants } from './constants/auth.constants';
 
-// const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
-//   name: 'some user',
-//   batch: '19',
-//   branch: 'BCE',
-//   personalEmail: 'someone@example.com',
-//   collegeEmail: 'someoe@edu.in',
-// });
-
 /** mocking definitions */
 describe('Auth Service', () => {
   let testingModule: TestingModule;
   let service: AuthService;
-  // let model: Model<UserDocument>;
 
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
@@ -46,7 +34,6 @@ describe('Auth Service', () => {
     }).compile();
 
     service = testingModule.get<AuthService>(AuthService);
-    // model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   afterEach(() => {
