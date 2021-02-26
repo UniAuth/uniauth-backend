@@ -1,10 +1,12 @@
-import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post } from '@nestjs/common';
+import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post, Body } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserService } from '../user/user.service';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 import { SCOPE } from '../account/minions/scopeMapper.minion';
 import { ApplicationService } from '../application/application.service';
+import { UpdateUserDto } from '../user/dto/update-user.dto';
+import { async } from 'rxjs';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -85,5 +87,18 @@ export class DashboardController {
       const action = await this.applicationService.delete(id);
     }
     res.redirect('/dashboard/dev');
+  }
+  @Get('/:id/edit')
+  @UseGuards(JwtAuthGuard)
+  async showEditForm(@Res() res: Response, @Param('id') id: string) {
+    const user = await this.userService.findOneById(id);
+    return res.render('profile/edit.hbs', { user });
+  }
+
+  @Post('/:id/edit')
+  @UseGuards(JwtAuthGuard)
+  async PostEditForm(@Res() res: Response, @Param('id') id: string , @Body() updateUserDto: UpdateUserDto) {
+    await this.userService.update(id , updateUserDto)
+    return res.redirect('/dashboard/');
   }
 }
