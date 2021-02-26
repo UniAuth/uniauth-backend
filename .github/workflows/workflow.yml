@@ -10,8 +10,6 @@ jobs:
       - uses: actions/checkout@master
       - name: Install dependencies
         run: npm Install
-        with:
-          python-version: 3.7
       - name: Lint
         run: npm run lint
       - name: Run tests and collect coverage
