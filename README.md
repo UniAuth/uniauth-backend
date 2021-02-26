@@ -1,11 +1,11 @@
+# UniAuth Backend
 ![GitHub issues](https://img.shields.io/github/issues/UniAuth/uniauth-backend)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Uniauth/uniauth-backend)
 ![GitHub last commit](https://img.shields.io/github/last-commit/uniauth/uniauth-backend)
 ![Gitlab code coverage](https://img.shields.io/gitlab/coverage/uniauth/uniauth-backend/master)
 ![GitHub top language](https://img.shields.io/github/languages/top/uniauth/uniauth-backend)
 ![Docker Automated build](https://img.shields.io/docker/automated/UniAuth/uniauth-backend)
-
-# Authentico
+[![CodeFactor](https://www.codefactor.io/repository/github/uniauth/uniauth-backend/badge)](https://www.codefactor.io/repository/github/uniauth/uniauth-backend)
 ![Ensure Build](https://github.com/UniAuth/uniauth-backend/workflows/Ensure%20Build/badge.svg)
 
 ## Objective
