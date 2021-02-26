@@ -15,13 +15,6 @@ const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
   personalEmail: 'someone@example.com',
   collegeEmail: 'someoe@edu.in',
 });
-// const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
-//   name: mock.name || 'some user',
-//   batch: mock.batch || '19',
-//   branch: mock.branch || 'BCE',
-//   personalEmail: mock.personalEmail || 'someone@example.com',
-//   collegeEmail: mock.collegeEmail || 'someoe@edu.in',
-// });
 
 /** mocking definitions */
 describe('User Service', () => {
@@ -72,9 +65,5 @@ describe('User Service', () => {
     it('should be defined', () => {
       expect(service.login).toBeDefined();
     });
-
-    // it('should login user into system', async () => {
-    //   console.log(mockModel);
-    // });
   });
 });

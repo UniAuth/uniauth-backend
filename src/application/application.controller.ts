@@ -13,7 +13,6 @@ import {
   NotFoundException,
   Logger,
 } from '@nestjs/common';
-// import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 import { AuthorizedUser } from '../user/interface/user.interface';
@@ -51,12 +50,6 @@ export class ApplicationController {
     delete application.admin;
     return application;
   }
-
-  //   @Put(':id')
-  //   @UsePipes(ValidationPipe)
-  //   update(@Param('id') id: string, @Body() updateApplicationDto: UpdateApplicationDto) {
-  //     return this.applicationService.update(+id, updateApplicationDto);
-  //   }
 
   @Delete(':id')
   @UsePipes(ValidationPipe)

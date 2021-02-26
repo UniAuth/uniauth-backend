@@ -1,7 +1,6 @@
 import { JwtModule } from '@nestjs/jwt';
 import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Model } from 'mongoose';
 import { User, UserDocument, UserSchema } from '../user/user.schema';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
@@ -19,8 +18,6 @@ const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
 describe('MailerService', () => {
   let testingModule: TestingModule;
   let service: MailerService;
-  // let model: Model<UserDocument>;
-
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
       imports: [
@@ -44,7 +41,6 @@ describe('MailerService', () => {
     }).compile();
 
     service = testingModule.get<MailerService>(MailerService);
-    // model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   it('should be defined', () => {

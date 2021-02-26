@@ -1,9 +1,6 @@
-// import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-// import { Model } from 'mongoose';
 import { ApplicationService } from '../application/application.service';
 import { UserService } from '../user/user.service';
-// import { User, UserDocument, UserSchema } from '../user/user.schema';
 import { AccountService } from './account.service';
 import { JwtModule } from '@nestjs/jwt';
 import { accessTokenJwtConstants } from './constants/access_token.constants';
@@ -13,8 +10,6 @@ import { AccountModule } from './account.module';
 describe('AccountService', () => {
   let testingModule: TestingModule;
   let service: AccountService;
-  // let model: Model<UserDocument>;
-
   beforeEach(async () => {
     testingModule = await Test.createTestingModule({
       imports: [
@@ -51,7 +46,6 @@ describe('AccountService', () => {
     }).compile();
 
     service = testingModule.get<AccountService>(AccountService);
-    // model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   it('should be defined', () => {

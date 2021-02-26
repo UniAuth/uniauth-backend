@@ -68,13 +68,6 @@ export class MailerService {
     const token = await this.generateJwt({ email });
     const link = `http://localhost:5000/account/register/verify/${token}`;
     console.log(link);
-    // const mailDetails = await transporter.sendMail({
-    //   from: 'ultimateraze011@gmail.com', // sender address
-    //   to: email, // list of receivers
-    //   subject: 'Hello ✔', // Subject line
-    //   text: 'Hello world?', // plain text body
-    //   html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`, // html body
-    // });
   }
 
   async sendPasswordResetLink(email: string) {
