@@ -41,5 +41,4 @@ describe('DashboardService', () => {
       expect(service.remove).toBeDefined();
     });
   });
-
 });
