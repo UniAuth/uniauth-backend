@@ -109,6 +109,7 @@ export class UserService {
     return this.userModel.findOne({ _id: userId });
   }
 
+
   async update(id: string, updateUserDto: UpdateUserDto) {
     const { name, collegeEmail, registrationNumber } = updateUserDto;
     const regNumber = new RegistrationNumberWorker(registrationNumber);
