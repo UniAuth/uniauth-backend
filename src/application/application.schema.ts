@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
 
+import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { Document } from 'mongoose';
 import { User } from '../user/user.schema';
 
 export type ApplicationDocument = Application & Document;
@@ -21,7 +21,7 @@ export class Application {
   @Prop({ required: true, unique: true })
   name: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
   admin: User;
 
   @Prop({ required: true })
@@ -48,7 +48,8 @@ export class Application {
   creationDate: Date;
 
   /** list of participants */
-  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'User', required: true, default: [] })
+  //   @Prop({ type: [MongooseSchema.Types.ObjectId], ref: 'User', required: true, default: [] })
+  @Prop([{ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true, default: [] }])
   participants: Array<User>;
 }
 
