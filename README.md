@@ -10,7 +10,7 @@
 
 ## Objective
 
-The detailed objective is available on the [/UniAuth](https://github.com/UniAuth/UniAuth) repo.
+The detailed objective is available on the [/UniAuth](https://github.com/UniAuth/UniAuth) repository.
 
 ---
 
