@@ -101,7 +101,7 @@ export class DashboardController {
   async PostEditForm(@Res() res: Response, @Param('id') id: string , @Body() updateUserDto: UpdateUserDto) {
     await this.userService.update(id , updateUserDto)
     return res.redirect('/dashboard/');
-
+  }
 
   @Get('/dev/details/:id')
   @UseGuards(JwtAuthGuard)
