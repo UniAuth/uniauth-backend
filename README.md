@@ -8,7 +8,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/uniauth/uniauth-backend/badge)](https://www.codefactor.io/repository/github/uniauth/uniauth-backend)
 ![Ensure Build](https://github.com/UniAuth/uniauth-backend/workflows/Ensure%20Build/badge.svg)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/uniauth/uniauth-backend)
 
 ## Objective
 
