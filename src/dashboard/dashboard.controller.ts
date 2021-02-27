@@ -6,6 +6,8 @@ import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 import { User, UserDocument } from '../user/user.schema';
 import { SCOPE } from '../account/minions/scopeMapper.minion';
 import { ApplicationService } from '../application/application.service';
+import { UpdateUserDto } from '../user/dto/update-user.dto';
+import { async } from 'rxjs';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -85,6 +87,20 @@ export class DashboardController {
       await this.applicationService.delete(id);
     }
     res.redirect('/dashboard/dev');
+  }
+
+  @Get('/:id/edit')
+  @UseGuards(JwtAuthGuard)
+  async showEditForm(@Res() res: Response, @Param('id') id: string) {
+    const user = await this.userService.findOneById(id);
+    return res.render('profile/edit.hbs', { user });
+  }
+
+  @Post('/:id/edit')
+  @UseGuards(JwtAuthGuard)
+  async PostEditForm(@Res() res: Response, @Param('id') id: string , @Body() updateUserDto: UpdateUserDto) {
+    await this.userService.update(id , updateUserDto)
+    return res.redirect('/dashboard/');
   }
 
   @Get('/dev/details/:id')
