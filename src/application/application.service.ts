@@ -33,7 +33,7 @@ export class ApplicationService {
     }
   }
 
-  async delete(id: String) {
+  async delete(id: string) {
     try {
       const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
     } catch (e) {
