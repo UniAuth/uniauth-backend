@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Application, ApplicationDocument } from './application.schema';
 import { isValidObjectId, Model } from 'mongoose';
 import { v4 as generateUUID } from 'uuid';
-import { User } from '../user/user.schema';
+import { User, UserDocument } from '../user/user.schema';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 
 @Injectable()
@@ -33,7 +33,7 @@ export class ApplicationService {
     }
   }
 
-  async delete(id: String) {
+  async delete(id: string) {
     try {
       const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
     } catch (e) {
@@ -44,6 +44,11 @@ export class ApplicationService {
 
   findAll() {
     return this.applicationModel.find();
+  }
+
+  async findUsersGrantedAccess(id: string) {
+    const data = await this.applicationModel.findOne({ _id: id }).populate('participants', 'name collegeEmail');
+    return data;
   }
 
   async findOneById(id: string) {

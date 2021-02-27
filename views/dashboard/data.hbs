@@ -18,11 +18,14 @@
     <section class="text-gray-700 body-font p-10">
         This page shows applications that are authorized to access your data. <br /><br />
         Currently <b>{{user.authorizedApplications.length}} applications</b> have access to your data.
-        {{#each app.items}}
-        <ul><b>{{name}}</b></ul>
-        <li>Support Email - {{supportEmail}}</li>
-        <li>Scope - {{scope}}</li>
-        {{/each}}
+            {{#each app.items}}
+                    <ul><b>{{name}}</b></ul> 
+                    <li>Support Email - {{supportEmail}}</li>
+                    <li>Scope - {{scope}}</li>
+                    {{#each participants}}
+                    {{this.name}}
+                    {{/each}}
+            {{/each}}
     </section>
 
 </body>
