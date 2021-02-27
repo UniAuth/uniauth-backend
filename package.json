@@ -15,6 +15,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "NODE_ENV=production node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "test": "jest --force-exit --detectOpenHandles",
     "test:watch": "jest --watch --detectOpenHandles",
     "test:cov": "jest --coverage --force-exit --detectOpenHandles",
@@ -24,6 +25,7 @@
     "build:doc": "./node_modules/.bin/compodoc-p libs/core/tsconfig.lib.json--theme Readthedocs-d dist/apps/documentation/compodoc ",
     "serve:doc": "./node_modules/.bin/compodoc-p libs/core/tsconfig.lib.json--theme Readthedocs-d dist/apps/documentation/compodoc-s"
   },
+  "pre-commit": [ "precommit-msg","test","format","lint" ],
   "dependencies": {
     "@compodoc/compodoc": "^1.1.11",
     "@nestjs/common": "^7.0.0",
@@ -77,6 +79,7 @@
     "eslint-plugin-import": "^2.20.1",
     "jest": "26.4.2",
     "mongodb-memory-server": "^6.9.3",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
     "ts-jest": "26.2.0",
