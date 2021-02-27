@@ -178,16 +178,17 @@ export class AccountController {
       const response = await this.userService.request(requestPasswordResetDto);
       const templateData = {
         server: {
-          message: 'please check your email for password reset link',
+          message: 'Please check your email for password reset link',
         },
+        flag: 0,
       };
       this.mailerService.sendPasswordResetLink(response.collegeEmail);
-      return res.render('account/login', templateData);
+      return res.render('partials/server-response', { templateData });
     } catch (e) {
       const templateData = {
         server: e.response,
       };
-      return res.render('account/login', templateData);
+      return res.render('partials/server-response', { templateData });
     }
   }
 
@@ -212,15 +213,16 @@ export class AccountController {
       const response = await this.userService.reset(resetPasswordDto, isValidToken);
       const templateData = {
         server: {
-          message: 'password changed successfully',
+          message: 'Password changed successfully',
         },
+        flag: 1,
       };
-      return res.render('account/login', templateData);
+      return res.render('partials/server-response', { templateData });
     } catch (e) {
       const templateData = {
         server: e.response,
       };
-      return res.render('account/register', templateData);
+      return res.render('partials/server-response', { templateData });
     }
   }
 
@@ -243,7 +245,13 @@ export class AccountController {
   async showRegisterSuccessPage(@Res() res: Response, @Param('token') token: string) {
     try {
       this.mailerService.checkVerificationToken(token);
-      return res.render('account/register/verify');
+      const templateData = {
+        server: {
+          message: 'Your account has been verified',
+        },
+        flag: 1,
+      };
+      return res.render('partials/server-response', { templateData });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -256,16 +264,17 @@ export class AccountController {
       const response = await this.userService.create(createUserDtoWithCaptcha);
       const templateData = {
         server: {
-          message: 'please check your email for verification link',
+          message: 'Please check your email for verification link',
         },
+        flag: 0,
       };
       this.mailerService.sendEmail(response.collegeEmail);
-      return res.render('account/register', templateData);
+      return res.render('partials/server-response', { templateData });
     } catch (e) {
       const templateData = {
         server: e.response,
       };
-      return res.render('account/register', templateData);
+      return res.render('partials/server-response', { templateData });
     }
   }
 }
