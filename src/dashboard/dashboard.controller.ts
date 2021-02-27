@@ -5,6 +5,7 @@ import { UserService } from '../user/user.service';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 import { SCOPE } from '../account/minions/scopeMapper.minion';
 import { ApplicationService } from '../application/application.service';
+import { appData } from '../../config/appData';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -26,7 +27,7 @@ export class DashboardController {
   async showDashboard(@Request() req, @Res() res: Response) {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.userService.findOneById(loggedInUser.id);
-    return res.render('dashboard/dashboard.hbs', { user });
+    return res.render('dashboard/dashboard.hbs', { user, Cname: appData.Name });
   }
 
   /**
@@ -37,7 +38,7 @@ export class DashboardController {
   async showProfile(@Request() req, @Res() res: Response) {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.userService.findOneById(loggedInUser.id);
-    return res.render('dashboard/profile.hbs', { user });
+    return res.render('dashboard/profile.hbs', { user, Cname: appData.Name });
   }
   /**
    * To load data tab
@@ -50,6 +51,7 @@ export class DashboardController {
     const applications = await this.applicationService.findAllByParticipant(user);
     return res.render('dashboard/data.hbs', {
       user,
+      Cname: appData.Name,
       app: {
         scope: SCOPE,
         items: applications,
@@ -69,6 +71,7 @@ export class DashboardController {
 
     return res.render('dashboard/dev.hbs', {
       user,
+      Cname: appData.Name,
       app: {
         scope: SCOPE,
         items: applications,
