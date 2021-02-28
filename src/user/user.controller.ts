@@ -48,16 +48,6 @@ export class UserController {
   /**
    * Responds to: _GET(`/`)_
    *
-   * Lists all the users
-   */
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  /**
-   * Responds to: _GET(`/`)_
-   *
    * Lists details of currenty authenticated user
    */
   @Get('details')

@@ -23,6 +23,7 @@ import { AccessUserDetailsDto } from './dto/access-user-details.dto';
 import { MailerService } from '../mailer/mailer.service';
 import { RequestPasswordResetDto } from '../user/dto/request-password-reset.dto';
 import { ResetPasswordDto } from '../user/dto/reset-password.dto';
+import { appData } from '../../config/appData';
 
 @Controller('account')
 export class AccountController {
@@ -53,7 +54,7 @@ export class AccountController {
     const { client_id } = incomingAuthDto;
     try {
       const applicationDetails = await this.accountService.validateAccessRequest(incomingAuthDto);
-      return res.render('account/o/login', { app: applicationDetails });
+      return res.render('account/o/login', { app: applicationDetails, project_name: appData.Name });
     } catch (e) {
       this.logger.error(`${e.message} for ${client_id}`);
       return res.render('error', e.response);
@@ -93,7 +94,11 @@ export class AccountController {
          * Render login page with error message from server
          */
         this.logger.error(`${e.message} for ${client_id}`);
-        return res.render('account/o/login', { app: applicationDetails, server: { message: e.message } });
+        return res.render('account/o/login', {
+          app: applicationDetails,
+          project_name: appData.Name,
+          server: { message: e.message },
+        });
       }
     } catch (e) {
       /**
@@ -124,7 +129,7 @@ export class AccountController {
   )
   async showLoginPage(@Res() res: Response) {
     try {
-      return res.render('account/login');
+      return res.render('account/login', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -154,7 +159,7 @@ export class AccountController {
       //   res.render('profile/homepage', user);
       res.redirect('./../dashboard');
     } catch (e) {
-      return res.render('account/login', { server: { message: e.message } });
+      return res.render('account/login', { server: { message: e.message }, project_name: appData.Name });
     }
   }
 
@@ -164,7 +169,7 @@ export class AccountController {
   @Get('/password/request')
   async showPasswordRequestPage(@Res() res: Response) {
     try {
-      return res.render('password/request');
+      return res.render('password/request', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -177,17 +182,16 @@ export class AccountController {
       const response = await this.userService.request(requestPasswordResetDto);
       const templateData = {
         server: {
-          message: 'Please check your email for password reset link',
+          message: 'please check your email for password reset link',
         },
-        flag: 0,
       };
       this.mailerService.sendPasswordResetLink(response.collegeEmail);
-      return res.render('partials/server-response', { templateData });
+      return res.render('account/login', { templateData, project_name: appData.Name });
     } catch (e) {
       const templateData = {
         server: e.response,
       };
-      return res.render('partials/server-response', { templateData });
+      return res.render('account/login', templateData);
     }
   }
 
@@ -195,7 +199,7 @@ export class AccountController {
   async showPasswordResetPage(@Res() res: Response, @Param('token') token: string) {
     try {
       this.mailerService.checkPasswordResetToken(token);
-      return res.render('password/reset');
+      return res.render('password/reset', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -212,16 +216,15 @@ export class AccountController {
       await this.userService.reset(resetPasswordDto, isValidToken);
       const templateData = {
         server: {
-          message: 'Password changed successfully',
+          message: 'password changed successfully',
         },
-        flag: 1,
       };
-      return res.render('partials/server-response', { templateData });
+      return res.render('account/login', { templateData, project_name: appData.Name });
     } catch (e) {
       const templateData = {
         server: e.response,
       };
-      return res.render('partials/server-response', { templateData });
+      return res.render('account/register', templateData);
     }
   }
 
@@ -231,7 +234,7 @@ export class AccountController {
   @Get('/register')
   async showRegisterPage(@Res() res: Response) {
     try {
-      return res.render('account/register');
+      return res.render('account/register', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -244,13 +247,7 @@ export class AccountController {
   async showRegisterSuccessPage(@Res() res: Response, @Param('token') token: string) {
     try {
       this.mailerService.checkVerificationToken(token);
-      const templateData = {
-        server: {
-          message: 'Your account has been verified',
-        },
-        flag: 1,
-      };
-      return res.render('partials/server-response', { templateData });
+      return res.render('account/register/verify');
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -263,17 +260,16 @@ export class AccountController {
       const response = await this.userService.create(createUserDtoWithCaptcha);
       const templateData = {
         server: {
-          message: 'Please check your email for verification link',
+          message: 'please check your email for verification link',
         },
-        flag: 0,
       };
       this.mailerService.sendEmail(response.collegeEmail);
-      return res.render('partials/server-response', { templateData });
+      return res.render('account/register', { templateData, project_name: appData.Name });
     } catch (e) {
       const templateData = {
         server: e.response,
       };
-      return res.render('partials/server-response', { templateData });
+      return res.render('account/register', { templateData, project_name: appData.Name });
     }
   }
 }
