@@ -10,7 +10,7 @@ export class AppController {
   showIndexPage(@Res() res: Response) {
     const templateData = {
       header: appData.Description,
-      Cname: appData.Name,
+      project_name: appData.Name,
       body: 'the only registration form you will ever fill',
       button: {
         title: 'Get Involved',

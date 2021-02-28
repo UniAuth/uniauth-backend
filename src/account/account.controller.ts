@@ -55,7 +55,7 @@ export class AccountController {
     const { client_id } = incomingAuthDto;
     try {
       const applicationDetails = await this.accountService.validateAccessRequest(incomingAuthDto);
-      return res.render('account/o/login', { app: applicationDetails, Cname: appData.Name });
+      return res.render('account/o/login', { app: applicationDetails, project_name: appData.Name });
     } catch (e) {
       this.logger.error(`${e.message} for ${client_id}`);
       return res.render('error', e.response);
@@ -97,7 +97,7 @@ export class AccountController {
         this.logger.error(`${e.message} for ${client_id}`);
         return res.render('account/o/login', {
           app: applicationDetails,
-          Cname: appData.Name,
+          project_name: appData.Name,
           server: { message: e.message },
         });
       }
@@ -130,7 +130,7 @@ export class AccountController {
   )
   async showLoginPage(@Res() res: Response) {
     try {
-      return res.render('account/login', { Cname: appData.Name });
+      return res.render('account/login', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -160,7 +160,7 @@ export class AccountController {
       //   res.render('profile/homepage', user);
       res.redirect('./../dashboard');
     } catch (e) {
-      return res.render('account/login', { server: { message: e.message }, Cname: appData.Name });
+      return res.render('account/login', { server: { message: e.message }, project_name: appData.Name });
     }
   }
 
@@ -170,7 +170,7 @@ export class AccountController {
   @Get('/password/request')
   async showPasswordRequestPage(@Res() res: Response) {
     try {
-      return res.render('password/request', { Cname: appData.Name });
+      return res.render('password/request', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -187,7 +187,7 @@ export class AccountController {
         },
       };
       this.mailerService.sendPasswordResetLink(response.collegeEmail);
-      return res.render('account/login', { templateData, Cname: appData.Name });
+      return res.render('account/login', { templateData, project_name: appData.Name });
     } catch (e) {
       const templateData = {
         server: e.response,
@@ -200,7 +200,7 @@ export class AccountController {
   async showPasswordResetPage(@Res() res: Response, @Param('token') token: string) {
     try {
       this.mailerService.checkPasswordResetToken(token);
-      return res.render('password/reset', { Cname: appData.Name });
+      return res.render('password/reset', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -220,7 +220,7 @@ export class AccountController {
           message: 'password changed successfully',
         },
       };
-      return res.render('account/login', { templateData, Cname: appData.Name });
+      return res.render('account/login', { templateData, project_name: appData.Name });
     } catch (e) {
       const templateData = {
         server: e.response,
@@ -235,7 +235,7 @@ export class AccountController {
   @Get('/register')
   async showRegisterPage(@Res() res: Response) {
     try {
-      return res.render('account/register', { Cname: appData.Name });
+      return res.render('account/register', { project_name: appData.Name });
     } catch (e) {
       return res.render('error', e.response);
     }
@@ -265,12 +265,12 @@ export class AccountController {
         },
       };
       this.mailerService.sendEmail(response.collegeEmail);
-      return res.render('account/register', { templateData, Cname: appData.Name });
+      return res.render('account/register', { templateData, project_name: appData.Name });
     } catch (e) {
       const templateData = {
         server: e.response,
       };
-      return res.render('account/register', { templateData, Cname: appData.Name });
+      return res.render('account/register', { templateData, project_name: appData.Name });
     }
   }
 }
