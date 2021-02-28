@@ -83,6 +83,7 @@ export class DashboardController {
     const user = await this.applicationService.findOneById(id);
     if (JSON.stringify(user.admin) === JSON.stringify(loggedInUser.id)) {
       const action = await this.applicationService.delete(id);
+
     }
     res.redirect('/dashboard/dev');
   }
