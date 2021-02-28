@@ -1,6 +1,6 @@
 api:
-  name: Authentico
-  description: '**THE** auth system.'
+  name: UniAuth
+  description: 'The next gen auth in vit'
   version: 1.0.0
   route: 'api'
 
