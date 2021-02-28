@@ -55,8 +55,8 @@
                 <div class="px-2 py-6 mx-auto lg:w-1/3 md:w-full">
                     <div class="p-4 border rounded-xl">
                         <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> {{name}}
-                            <form action="/dashboard/dev/{{_id}}" method="POST">
-                                <button style="float: right" type="submit">
+                            <form action="/dashboard/dev/{{_id}}" method="POST" id="{{_id}}">
+                                <button type="button" onclick="confirmation('{{_id}}')" style="float: right">
                                     <svg xmlns="http://www.w3.org/2000/svg" width=" 30" height="24px"
                                         viewBox="0 0 20 20" fill="#d11a2a">
                                         <path fill-rule="evenodd"
@@ -227,6 +227,16 @@
 </body>
 <script src="../assets/js/util.js"></script>
 <script>
+    function confirmation(id) {
+        console.log("runnuning")
+
+        if (confirm('Are you sure you want to delete this app?')) {
+            document.getElementById(id).submit();
+        }
+
+    }
+</script>
+<script>
     function processSubmission() {
         /** get all selected scopes **/
         const checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
@@ -299,5 +309,7 @@
     /**  Del item **/
 
 </script>
+
+
 
 </html>
