@@ -20,19 +20,26 @@
                     Authentico
                 </h1>
                 <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 lg:w-1/2">
-                    Your account is now verified 🎖
+                    {{templateData.server.message}}
                     <br />
                 </p>
                 <br />
-                <small><i>you will be redirected to login page in 5 seconds</i></small>
+                <small id="redirectMsg"><i>you will be redirected to login page in 5 seconds</i></small>
             </div>
     </section>
 
 </body>
+
 <script>
-    setTimeout(() => {
-        window.location.href = "./../../login"
-    }, 5000)
+    var x = document.getElementById('redirectMsg')
+    x.style.display = "none"
+    if ({{ templateData.flag }} == 1) {
+        x.style.display = "block"
+        setTimeout(() => {
+            window.location.href = "./../../login"
+        }, 5000)
+    }
 </script>
+
 
 </html>
