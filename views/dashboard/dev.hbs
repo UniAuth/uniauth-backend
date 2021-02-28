@@ -102,7 +102,7 @@
                                 <input type="text" placeholder="Client Secret" id="{{clientSecret}}"
                                     value="{{clientSecret}}" readonly
                                     class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
-                                <button onclick="copyToClipboard({{clientSecret}})">
+                                <button onclick="copyToClipboard('{{clientSecret}}')">
                                     <svg width=" 30" height="24px" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -124,7 +124,7 @@
                                 <input type="text" id="{{this}}" placeholder="Client Secret" value="{{this}}" readonly
                                     class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
                                 {{/each}}
-                                <button onclick="copyToClipboard({{this}})">
+                                <button onclick="copyToClipboard('{{this}}')">
                                     <svg width=" 30" height="24px" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
