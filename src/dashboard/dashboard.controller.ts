@@ -1,13 +1,11 @@
-import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post, Body ,Req} from '@nestjs/common';
+import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Param, Post, Body } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserService } from '../user/user.service';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
-import { User, UserDocument } from '../user/user.schema';
 import { SCOPE } from '../account/minions/scopeMapper.minion';
 import { ApplicationService } from '../application/application.service';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
-import { async } from 'rxjs';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -84,8 +82,7 @@ export class DashboardController {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.applicationService.findOneById(id);
     if (JSON.stringify(user.admin) === JSON.stringify(loggedInUser.id)) {
-      const action = await this.applicationService.delete(id);
-
+      await this.applicationService.delete(id);
     }
     res.redirect('/dashboard/dev');
   }
@@ -99,8 +96,8 @@ export class DashboardController {
 
   @Post('/:id/edit')
   @UseGuards(JwtAuthGuard)
-  async PostEditForm(@Res() res: Response, @Param('id') id: string , @Body() updateUserDto: UpdateUserDto) {
-    await this.userService.update(id , updateUserDto)
+  async PostEditForm(@Res() res: Response, @Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    await this.userService.update(id, updateUserDto);
     return res.redirect('/dashboard/');
   }
 
@@ -108,11 +105,10 @@ export class DashboardController {
   @UseGuards(JwtAuthGuard)
   async showUserList(@Request() req, @Res() res: Response, @Param('id') id: string) {
     try {
-      const loggedInUser: LoggedInUser = req.user;
       const userDetails = await this.applicationService.findUsersGrantedAccess(id);
-      res.render('dashboard/details.hbs',{
-        userDetails:userDetails.participants
-      })
+      res.render('dashboard/details.hbs', {
+        userDetails: userDetails.participants,
+      });
     } catch (e) {
       res.render('error.hbs');
     }

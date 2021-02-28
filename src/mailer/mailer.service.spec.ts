@@ -6,7 +6,6 @@ import { User, UserDocument, UserSchema } from '../user/user.schema';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
 import { MailerService } from './mailer.service';
-import * as config from 'config';
 import { UserService } from '../user/user.service';
 
 const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({

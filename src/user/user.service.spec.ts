@@ -10,7 +10,7 @@ import { UserService } from './user.service';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 
 const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({
-  name:'some user',
+  name: 'some user',
   batch: '19',
   branch: 'BCE',
   personalEmail: 'someone@example.com',
@@ -61,14 +61,14 @@ describe('User Service', () => {
     }).compile();
 
     service = testingModule.get<UserService>(UserService);
-    model = testingModule.get<Model<UserDocument>>(getModelToken(User.name));
+    testingModule.get<Model<UserDocument>>(getModelToken(User.name));
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should be defined', async() => {
+  it('should be defined', async () => {
     await expect(service).toBeDefined();
   });
 

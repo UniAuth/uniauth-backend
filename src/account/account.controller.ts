@@ -21,7 +21,6 @@ import { CreateUserDtoWithCaptcha } from '../user/dto/create-user.dto';
 import { ApplicationService } from '../application/application.service';
 import { AccessUserDetailsDto } from './dto/access-user-details.dto';
 import { MailerService } from '../mailer/mailer.service';
-import { findConfigFile } from 'typescript';
 import { RequestPasswordResetDto } from '../user/dto/request-password-reset.dto';
 import { ResetPasswordDto } from '../user/dto/reset-password.dto';
 
@@ -210,7 +209,7 @@ export class AccountController {
   ) {
     try {
       const isValidToken = await this.mailerService.checkPasswordResetToken(token);
-      const response = await this.userService.reset(resetPasswordDto, isValidToken);
+      await this.userService.reset(resetPasswordDto, isValidToken);
       const templateData = {
         server: {
           message: 'Password changed successfully',

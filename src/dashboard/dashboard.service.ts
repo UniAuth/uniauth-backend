@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDashboardDto } from './dto/create-dashboard.dto';
-import { UpdateDashboardDto } from './dto/update-dashboard.dto';
 
 @Injectable()
 export class DashboardService {
-  create(createDashboardDto: CreateDashboardDto) {
+  create() {
     return 'This action adds a new dashboard';
   }
 
@@ -16,7 +14,7 @@ export class DashboardService {
     return `This action returns a #${id} dashboard`;
   }
 
-  update(id: number, updateDashboardDto: UpdateDashboardDto) {
+  update(id: number) {
     return `This action updates a #${id} dashboard`;
   }
 

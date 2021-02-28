@@ -89,7 +89,7 @@ export class UserService {
 
   async pushApplicationIntoUserParticipantList(application: Application, user: User) {
     try {
-      const result = await this.userModel.findOneAndUpdate(
+      await this.userModel.findOneAndUpdate(
         { registrationNumber: user.registrationNumber },
         {
           $addToSet: { authorizedApplications: application },
@@ -108,7 +108,6 @@ export class UserService {
   findOneById(userId: string) {
     return this.userModel.findOne({ _id: userId });
   }
-
 
   async update(id: string, updateUserDto: UpdateUserDto) {
     const { name, collegeEmail, registrationNumber } = updateUserDto;
