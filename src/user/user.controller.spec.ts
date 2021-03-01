@@ -46,12 +46,6 @@ describe('UserController', () => {
     });
   });
 
-  describe('.findAll()', () => {
-    it('should be defined', () => {
-      expect(controller.findAll).toBeDefined();
-    });
-  });
-
   describe('.findOne()', () => {
     it('should be defined', () => {
       expect(controller.findOne).toBeDefined();
