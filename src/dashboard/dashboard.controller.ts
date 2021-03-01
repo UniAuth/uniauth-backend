@@ -1,11 +1,12 @@
-import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post, Req } from '@nestjs/common';
+import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Delete, Param, Post } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserService } from '../user/user.service';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
-import { User, UserDocument } from '../user/user.schema';
 import { SCOPE } from '../account/minions/scopeMapper.minion';
 import { ApplicationService } from '../application/application.service';
+import { UpdateUserDto } from '../user/dto/update-user.dto';
+import { appData } from '../../config/appData';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -27,7 +28,7 @@ export class DashboardController {
   async showDashboard(@Request() req, @Res() res: Response) {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.userService.findOneById(loggedInUser.id);
-    return res.render('dashboard/dashboard.hbs', { user });
+    return res.render('dashboard/dashboard.hbs', { user, project_name: appData.Name });
   }
 
   /**
@@ -38,7 +39,7 @@ export class DashboardController {
   async showProfile(@Request() req, @Res() res: Response) {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.userService.findOneById(loggedInUser.id);
-    return res.render('dashboard/profile.hbs', { user });
+    return res.render('dashboard/profile.hbs', { user, project_name: appData.Name });
   }
   /**
    * To load data tab
@@ -51,6 +52,7 @@ export class DashboardController {
     const applications = await this.applicationService.findAllByParticipant(user);
     return res.render('dashboard/data.hbs', {
       user,
+      project_name: appData.Name,
       app: {
         scope: SCOPE,
         items: applications,
@@ -67,8 +69,10 @@ export class DashboardController {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.userService.findOneById(loggedInUser.id);
     const applications = await this.applicationService.findAllByOwner(user);
+
     return res.render('dashboard/dev.hbs', {
       user,
+      project_name: appData.Name,
       app: {
         scope: SCOPE,
         items: applications,
@@ -82,20 +86,33 @@ export class DashboardController {
     const loggedInUser: LoggedInUser = req.user;
     const user = await this.applicationService.findOneById(id);
     if (JSON.stringify(user.admin) === JSON.stringify(loggedInUser.id)) {
-      const action = await this.applicationService.delete(id);
+      await this.applicationService.delete(id);
     }
     res.redirect('/dashboard/dev');
+  }
+
+  @Get('/:id/edit')
+  @UseGuards(JwtAuthGuard)
+  async showEditForm(@Res() res: Response, @Param('id') id: string) {
+    const user = await this.userService.findOneById(id);
+    return res.render('profile/edit.hbs', { user });
+  }
+
+  @Post('/:id/edit')
+  @UseGuards(JwtAuthGuard)
+  async PostEditForm(@Res() res: Response, @Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    await this.userService.update(id, updateUserDto);
+    return res.redirect('/dashboard/');
   }
 
   @Get('/dev/details/:id')
   @UseGuards(JwtAuthGuard)
   async showUserList(@Request() req, @Res() res: Response, @Param('id') id: string) {
     try {
-      const loggedInUser: LoggedInUser = req.user;
       const userDetails = await this.applicationService.findUsersGrantedAccess(id);
-      res.render('dashboard/details.hbs',{
-        userDetails:userDetails.participants
-      })
+      res.render('dashboard/details.hbs', {
+        userDetails: userDetails.participants,
+      });
     } catch (e) {
       res.render('error.hbs');
     }

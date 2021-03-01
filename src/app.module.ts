@@ -1,6 +1,4 @@
 import * as config from 'config';
-
-import { AccountController } from './account/account.controller';
 import { AccountModule } from './account/account.module';
 import { AppController } from './app.controller';
 import { ApplicationModule } from './application/application.module';

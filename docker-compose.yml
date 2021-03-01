@@ -1,0 +1,9 @@
+version: '3.0'
+services:
+  uniauth:
+    build: .
+    image: uniauth:1
+    ports:
+      - '80:80'
+    environment:
+      - database = "mongodb://127.0.0.1:27017/authentico"

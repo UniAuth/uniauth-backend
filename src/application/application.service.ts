@@ -11,7 +11,10 @@ import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 export class ApplicationService {
   private readonly logger = new Logger('application');
 
-  constructor(@InjectModel(Application.name) private applicationModel: Model<ApplicationDocument>) {}
+  constructor(
+    @InjectModel(Application.name) private applicationModel: Model<ApplicationDocument>,
+    @InjectModel('User') private userModel: Model<UserDocument>,
+  ) {}
 
   async create(createApplicationDto: CreateApplicationDto, authorizedUser: LoggedInUser): Promise<Application> {
     try {
@@ -35,7 +38,13 @@ export class ApplicationService {
 
   async delete(id: string) {
     try {
-      const deleteApp = await this.applicationModel.findByIdAndDelete({ _id: id });
+      const AppUser = await this.applicationModel.findOne({ _id: id }).populate('participants', '_id');
+      AppUser.participants.forEach(async (user) => {
+        const User = await this.userModel.findById(user);
+        User.authorizedApplications = User.authorizedApplications.filter((_id) => _id.toString() !== id);
+        await User.save();
+      });
+      await this.applicationModel.findByIdAndDelete({ _id: id });
     } catch (e) {
       this.logger.error(e);
       throw new ConflictException(e.message);
@@ -73,7 +82,7 @@ export class ApplicationService {
 
   async pushUserIntoApplicationParticipantList(application: Application, user: User) {
     try {
-      const result = await this.applicationModel.findOneAndUpdate(
+      await this.applicationModel.findOneAndUpdate(
         { name: application.name },
         {
           $addToSet: { participants: user },

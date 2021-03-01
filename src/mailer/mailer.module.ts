@@ -1,4 +1,4 @@
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { User, UserSchema } from '../user/user.schema';
 
 import { MailerController } from './mailer.controller';

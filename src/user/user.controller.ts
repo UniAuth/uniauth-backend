@@ -48,16 +48,6 @@ export class UserController {
   /**
    * Responds to: _GET(`/`)_
    *
-   * Lists all the users
-   */
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  /**
-   * Responds to: _GET(`/`)_
-   *
    * Lists details of currenty authenticated user
    */
   @Get('details')
@@ -71,24 +61,6 @@ export class UserController {
    *
    * To update details of user
    */
-  /**
-   * To load edit form
-   */
-  //   @todo: migrate to dashboard
-  //   @Get('/:id/edit')
-  //   @UseGuards(JwtAuthGuard)
-  //   async showEditForm(@Res() res: Response, @Param('id') id: string) {
-  //     const user = await this.userService.findOneById(id);
-  //     return res.render('profile/edit.hbs', { user });
-  //   }
-
-  //   @Post('/:id/edit')
-  //   @UseGuards(JwtAuthGuard)
-  //   async PostEditForm(
-  //     @Res() res: Response,
-  //   ) {
-  //     return res.redirect('/dashboard/');
-  //   }
 
   /**
    * Responds to: _DELETE(`/:id`)_

@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Model, model } from 'mongoose';
+import { Model } from 'mongoose';
 import { User, UserDocument, UserSchema } from '../user/user.schema';
 import { ApplicationService } from './application.service';
 import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 import * as mongooseUniquevalidator from 'mongoose-unique-validator';
-import { UserService } from '../user/user.service';
 import { Application, ApplicationSchema } from './application.schema';
 
 const mockUser = (mock?: Partial<User>): Partial<UserDocument> => ({

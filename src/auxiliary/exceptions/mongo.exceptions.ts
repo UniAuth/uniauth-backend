@@ -1,4 +1,4 @@
-import { BadGatewayException, BadRequestException, Catch, ConflictException, ExceptionFilter } from '@nestjs/common';
+import { BadRequestException, Catch, ExceptionFilter } from '@nestjs/common';
 
 import { Error } from 'mongoose';
 
