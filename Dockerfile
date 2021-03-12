@@ -1,6 +1,6 @@
-FROM node:15.3.0-alpine3.10
+FROM node:lts-alpine3.10
 
-# Labls
+# Labels
 LABEL maintainer="Yash Kumar Verma yk.verma2000@gmail.com"
 
 # Document environment configurations
@@ -11,20 +11,19 @@ ENV database ='mongodb://127.0.0.1:27017/authentico'
 WORKDIR /app
 
 # Only copy the package.json file to work directory
-COPY package.json /app
-
+COPY package.json .
 
 # Install all Packages
 RUN npm install
 
 # Copy all other source code to work directory
-ADD . /app
+COPY . .
 
 # Build the project
 RUN npm run build
-RUN docker compose up
+# RUN docker compose up
 
 # run the server
-CMD ["npm", "start:dev"] 
+CMD ["npm", "run", "start:dev"] 
 
 EXPOSE 80
