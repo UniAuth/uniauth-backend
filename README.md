@@ -26,8 +26,8 @@ Running the project on local system is **strongly recommended**, even if you are
 
 - Clone the repository to your system using `git clone https://github.com/UniAuth/uniauth-backend`
 - Now open the cloned repository using `cd uniauth-backend`
-- The project depends on numerous npm packages. Install them using `yarn install` or `npm install`
-- Run `yarn start:dev` or `npm run start:dev` to launch a development server.
+- The project depends on numerous npm packages. Install them using `npm ci`
+- Run `npm run start:dev` to launch a development server.
 - Open [localhost:5000](http://localhost:5000) and ensure that the server is running.
 
 Seems a long process? We have an open issue to [create a docker image](https://github.com/UniAuth/uniauth-backend/issues/9) to make this short. Help us out by sending a pr.

@@ -25,7 +25,12 @@
     "build:doc": "./node_modules/.bin/compodoc-p libs/core/tsconfig.lib.json--theme Readthedocs-d dist/apps/documentation/compodoc ",
     "serve:doc": "./node_modules/.bin/compodoc-p libs/core/tsconfig.lib.json--theme Readthedocs-d dist/apps/documentation/compodoc-s"
   },
-  "pre-commit": [ "precommit-msg","test","format","lint" ],
+  "pre-commit": [
+    "precommit-msg",
+    "test",
+    "format",
+    "lint"
+  ],
   "dependencies": {
     "@compodoc/compodoc": "^1.1.11",
     "@nestjs/common": "^7.0.0",
