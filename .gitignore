@@ -40,4 +40,4 @@ lerna-debug.log*
 
 # local pacage.json file
 # package-lock.json
-# yarn.lock
+yarn.lock
