@@ -76,7 +76,9 @@ export class ApplicationService {
   }
 
   async findAllByParticipant(user: User): Promise<Array<Application>> {
-    const item = await this.applicationModel.find({ participants: user });
+    const item = await this.applicationModel.find({
+      participants: { $in: [user] },
+    });
     return item;
   }
 
