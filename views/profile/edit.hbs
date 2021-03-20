@@ -13,9 +13,8 @@
     {{!-- dashboard header starts --}}
     <header class="text-gray-700 bg-white border-t border-b body-font">
         <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
-            <a href="./" class="flex items-center w-40 font-medium text-gray-900 title-font md:mb-0">
-                <h1 class="text-2xl font-semibold tracking-tighter">{{project_name}}</h1>
-            </a>
+            <a href="http://localhost:5000/dashboard" class="flex items-center w-40 font-medium text-gray-900 title-font md:mb-0">
+                <h1 class="text-2xl font-semibold tracking-tighter">UniAuth</h1>
             <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto ">
                 <a href="/dashboard/profile"
                     class="mr-5 text-sm text-blue-700 font-semibold hover:text-gray-800">Profile</a>
@@ -31,18 +30,19 @@
     <div class="container">
         <div class="row">
             <h1 style="text-align:center;">
+
                 Edit Profile Details
             </h1>
             <div class=" flex items-center justify-center">
 
-                <form id="form" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                <form id="form" class="bg-blue shadow-md rounded px-8 pt-6 pb-8 mb-4"
                     action="/dashboard/{{user._id}}/edit" method="POST">
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                             Name
                         </label>
                         <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            class="shadow appearance-lg border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="name" id="name" type="text" value="{{user.name}}" required>
                     </div>
 
@@ -51,16 +51,16 @@
                             College Email
                         </label>
                         <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            class="shadow appearance-lg border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="collegeEmail" id="email" type="email" value="{{user.collegeEmail}}" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="resistrationNum">
-                            registration Number
+                            Registration Number
                         </label>
                         <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            class="shadow appearance-lg border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="registrationNumber" id="resistrationNum" type="text"
                             value="{{user.registrationNumber}}" required>
                     </div>
