@@ -19,7 +19,6 @@ export class CreateApplicationDto {
   name: string;
 
   @IsNotEmpty()
-  @MinLength(15)
   @MaxLength(100)
   description: string;
 
