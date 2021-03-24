@@ -13,77 +13,67 @@
     {{!-- dashboard header starts --}}
     <header class="text-gray-700 bg-white border-t border-b body-font">
         <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
-            <a href="./" class="flex items-center w-40 font-medium text-gray-900 title-font md:mb-0">
-                <h1 class="text-2xl font-semibold tracking-tighter">{{project_name}}</h1>
-            </a>
-            <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto ">
-                <a href="/dashboard/profile"
-                    class="mr-5 text-sm text-blue-700 font-semibold hover:text-gray-800">Profile</a>
-                <a href="/dashboard/data" class="mr-5 text-sm text-gray-600 hover:text-gray-800">My Data</a>
-                <a href="/dashboard/dev" class="mr-5 text-sm text-gray-600 hover:text-gray-800">Dev Arena</a>
-            </nav>
-            <a href="./../account/logout"
-                class="items-center px-8 py-3 mt-4 text-sm text-gray-500 transition duration-500 ease-in-out transform bg-white rounded-lg lg:inline-flex lg:mt-px focus:ring focus:outline-none">Log
-                Out
-            </a>
+            <a href="/dashboard" class="flex items-center w-40 font-medium text-gray-900 title-font md:mb-0">
+                <h1 class="text-2xl font-semibold tracking-tighter">UniAuth</h1>
+                <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto ">
+                    <a href="/dashboard/profile"
+                        class="mr-5 text-sm text-blue-700 font-semibold hover:text-gray-800">Profile</a>
+                    <a href="/dashboard/data" class="mr-5 text-sm text-gray-600 hover:text-gray-800">My Data</a>
+                    <a href="/dashboard/dev" class="mr-5 text-sm text-gray-600 hover:text-gray-800">Dev Arena</a>
+                </nav>
+                <a href="./../account/logout"
+                    class="items-center px-8 py-3 mt-4 text-sm text-gray-500 transition duration-500 ease-in-out transform bg-white rounded-lg lg:inline-flex lg:mt-px focus:ring focus:outline-none">Log
+                    Out
+                </a>
         </div>
     </header>
-    <div class="container">
-        <div class="row">
-            <h1 style="text-align:center;">
-                Edit Profile Details
-            </h1>
-            <div class=" flex items-center justify-center">
-
-                <form id="form" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-                    action="/dashboard/{{user._id}}/edit" method="POST">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                            Name
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            name="name" id="name" type="text" value="{{user.name}}" required>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                            College Email
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            name="collegeEmail" id="email" type="email" value="{{user.collegeEmail}}" required>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="resistrationNum">
-                            registration Number
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            name="registrationNumber" id="resistrationNum" type="text"
-                            value="{{user.registrationNumber}}" required>
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <button id="submit"
-                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit">
-                            Submit
-                        </button>
-                    </div>
-
-                    <div class="mb-4">
 
 
-                </form>
+    <div class="row">
+        <h1 class=" text-blue-800 text-center font-semibold mt-20" style="font-size:xx-large">Edit Profile Details
+        </h1><br />
+        <div class=" flex items-center justify-center ">
+            <form id="form" class="bg-white w-3/12 shadow-2xl border rounded px-8 pt-6 pb-8 mb-8 ;"
+                action="/dashboard/{{user._id}}/edit" method="POST">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                        Name
+                    </label>
+                    <input
+                        class="shadow appearance-gray border rounded w-full py-2 px-3 text-black-700 leading-tight bg-gray-200 focus:shadow-outline"
+                        name="name" id="name" type="text" value="{{user.name}}" required>
+                </div>
 
-            </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                        College Email
+                    </label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight bg-gray-200 focus:shadow-outline"
+                        name="collegeEmail" id="email" type="email" value="{{user.collegeEmail}}" required>
+                </div>
 
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="resistrationNum">
+                        Registration Number
+                    </label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight bg-gray-200 focus:shadow-outline"
+                        name="registrationNumber" id="resistrationNum" type="text" value="{{user.registrationNumber}}"
+                        required>
 
+                </div><br />
+                <div class="flex items-center justify-center">
+                    <button id="submit"
+                        class="bg-green-700 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:bg-gray-50 focus:shadow-outline"
+                        type="submit">
+                        Submit
+                    </button>
+                </div>
+                <div class="mb-4">
+            </form>
         </div>
-
-
+    </div>
     </div>
 
 </body>
