@@ -11,7 +11,8 @@
 </head>
 <style>
     .inputWithIcon input[type="text"] {
-        padding-left: 40px;
+        padding-left: 10px;
+        padding-right: 60px;
     }
 
     .inputWithIcon {
@@ -31,6 +32,11 @@
         color: #212121;
     }
 
+    .break{
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: normal;
+    }  
     .del :hover {
         color: red;
     }
@@ -56,7 +62,7 @@
                 {{#each app.items}}
                 {{!-- application cards loop start --}}
                 {{!-- first application card start --}}
-                <div class="px-2 py-6 mx-auto lg:w-1/3 md:w-full">
+                <div class="px-2 py-6 mx-auto lg:w-1/2 md:w-1/2">
                     <div class="p-4 border rounded-xl card">
                         <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> {{name}}
                             <form action="/dashboard/dev/{{_id}}" method="POST" id="{{_id}}">
@@ -70,7 +76,7 @@
                                 </button>
                             </form>
                         </h2>
-                        <p class="mb-4 text-base leading-relaxed">{{description}}
+                        <p class="mb-4 text-base leading-relaxed break">{{description}}
                         </p>
                         {{!-- client id starts--}}
                         <div class="relative ">
