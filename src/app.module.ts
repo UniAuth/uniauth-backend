@@ -14,7 +14,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { mongooseConfig } from './config/mongoose.config';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { WinstonModule, utilities as nestWinstonModuleUtilities } from 'nest-winston';
+import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 
 /**
@@ -39,6 +39,7 @@ import * as winston from 'winston';
           ),
         }),
         new winston.transports.File({ filename: 'application.log' }),
+        new winston.transports.File({ filename: 'error.log', level: 'error' }),
       ],
     }),
   ],
