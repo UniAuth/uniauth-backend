@@ -7,15 +7,17 @@ import { confirmEmailTokenConstants } from './constants/confirmEmailToken.consta
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '../user/user.schema';
 import { UserService } from '../user/user.service';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Injectable()
 export class MailerService {
-  private readonly logger = new Logger('mailer');
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private jwtService: JwtService,
     @Inject(UserService)
     private readonly userService: UserService,
+    @Inject(WINSTON_MODULE_PROVIDER)
+    private readonly logger = new Logger('mailer'),
   ) {}
 
   /**

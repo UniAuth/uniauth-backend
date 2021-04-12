@@ -1,6 +1,13 @@
 import RegistrationNumberWorker from '@vitspot/vit-registration-number';
 
-import { ConflictException, Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  Logger,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,6 +19,7 @@ import { LoginDto } from '../auth/dto/login.dto';
 import { Application } from '../application/application.schema';
 import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 /**
  * **User Service**
@@ -24,9 +32,10 @@ import { ResetPasswordDto } from './dto/reset-password.dto';
  */
 @Injectable()
 export class UserService {
-  private readonly logger = new Logger('user');
-
-  constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel('User') private userModel: Model<UserDocument>,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger = new Logger('user'),
+  ) {}
 
   /** funciton to facilitate user login */
   async login(loginDto: LoginDto): Promise<any> {

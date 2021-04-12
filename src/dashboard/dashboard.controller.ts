@@ -7,15 +7,15 @@ import { SCOPE } from '../account/minions/scopeMapper.minion';
 import { ApplicationService } from '../application/application.service';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
 import { appData } from '../../config/appData';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Controller('dashboard')
 export class DashboardController {
-  private readonly logger = new Logger('dashboard');
-
   /** initialize dashboard module */
   constructor(
     @Inject(UserService) private readonly userService: UserService,
     @Inject(ApplicationService) private readonly applicationService: ApplicationService,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger = new Logger('dashboard'),
   ) {
     this.logger.verbose('dashboard initialized');
   }

@@ -1,7 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { WinstonModule } from 'nest-winston';
+
 import { DashboardController } from './dashboard.controller';
 import { UserService } from '../user/user.service';
 import { ApplicationService } from '../application/application.service';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 describe('DashboardController', () => {
   let controller: DashboardController;
@@ -35,6 +40,7 @@ describe('DashboardController', () => {
           }),
         },
       ],
+      imports: [WinstonModule.forRoot(logger.console())],
     }).compile();
 
     controller = module.get<DashboardController>(DashboardController);

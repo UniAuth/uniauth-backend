@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { WinstonModule } from 'nest-winston';
 import { UserService } from '../user/user.service';
 import { AuthService } from '../auth/auth.service';
 import { AccountController } from './account.controller';
@@ -6,6 +7,9 @@ import { AccountService } from './account.service';
 import { MailerService } from '../mailer/mailer.service';
 import { ApplicationService } from '../application/application.service';
 import { closeInMongodConnection } from '../../test-utils/MongooseTestModule';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 describe('AccountController', () => {
   let controller: AccountController;
@@ -53,6 +57,7 @@ describe('AccountController', () => {
           }),
         },
       ],
+      imports: [WinstonModule.forRoot(logger.console())],
     }).compile();
 
     controller = module.get<AccountController>(AccountController);

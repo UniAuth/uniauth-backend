@@ -1,7 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { WinstonModule } from 'nest-winston';
+import { LoggerConfig } from '../logger/LoggerConfig';
 import { closeInMongodConnection } from '../../test-utils/MongooseTestModule';
 import { ApplicationController } from './application.controller';
 import { ApplicationService } from './application.service';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 describe('ApplicationController', () => {
   let controller: ApplicationController;
@@ -20,6 +24,7 @@ describe('ApplicationController', () => {
           }),
         },
       ],
+      imports: [WinstonModule.forRoot(logger.console())],
     }).compile();
 
     controller = module.get<ApplicationController>(ApplicationController);

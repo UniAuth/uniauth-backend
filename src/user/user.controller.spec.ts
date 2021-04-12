@@ -2,19 +2,27 @@
  * https://github.com/jmcdo29/testing-nestjs
  */
 import { Test, TestingModule } from '@nestjs/testing';
+import { WinstonModule } from 'nest-winston';
 import { closeInMongodConnection, rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserController } from './user.controller';
 import { UserSchema } from './user.schema';
 import { UserService } from './user.service';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 describe('UserController', () => {
   let controller: UserController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [rootMongooseTestModule(), MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
+      imports: [
+        rootMongooseTestModule(),
+        MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+        WinstonModule.forRoot(logger.console()),
+      ],
       controllers: [UserController],
       providers: [
         {

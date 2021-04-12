@@ -1,13 +1,16 @@
 import * as mongooseUniquevalidator from 'mongoose-unique-validator';
-
+import { WinstonModule } from 'nest-winston';
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
-import { User, UserDocument, UserSchema } from './user.schema';
-
 import { Model } from 'mongoose';
 import { Test } from '@nestjs/testing';
 import { TestingModule } from '@nestjs/testing/testing-module';
+
+import { User, UserDocument, UserSchema } from './user.schema';
 import { UserService } from './user.service';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 const mockUser = (): Partial<UserDocument> => ({
   name: 'some user',
@@ -45,6 +48,7 @@ describe('User Service', () => {
             },
           },
         ]),
+        WinstonModule.forRoot(logger.console()),
       ],
       providers: [
         UserService,

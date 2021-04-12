@@ -10,11 +10,10 @@ import { UserService } from '../user/user.service';
 import { User } from '../user/user.schema';
 import { AccessUserDetailsDto } from './dto/access-user-details.dto';
 import { AuthService } from '../auth/auth.service';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Injectable()
 export class AccountService {
-  private readonly logger = new Logger('accounts');
-
   /**
    * Initialize account services
    */
@@ -29,6 +28,9 @@ export class AccountService {
 
     @Inject(AuthService)
     private readonly authService: AuthService,
+
+    @Inject(WINSTON_MODULE_PROVIDER)
+    private readonly logger = new Logger('accounts'),
   ) {}
 
   /**

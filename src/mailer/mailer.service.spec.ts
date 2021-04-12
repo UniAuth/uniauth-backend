@@ -1,5 +1,6 @@
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
+import { WinstonModule } from 'nest-winston';
 import { User, UserDocument, UserSchema } from '../user/user.schema';
 
 import { JwtModule } from '@nestjs/jwt';
@@ -7,6 +8,9 @@ import { MailerService } from './mailer.service';
 import { UserService } from '../user/user.service';
 import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 const mockUser = (): Partial<UserDocument> => ({
   name: 'some user',
@@ -30,6 +34,7 @@ describe('MailerService', () => {
           secret: confirmEmailTokenConstants.secret,
           signOptions: { expiresIn: confirmEmailTokenConstants.expiresIn },
         }),
+        WinstonModule.forRoot(logger.console()),
       ],
       providers: [
         MailerService,

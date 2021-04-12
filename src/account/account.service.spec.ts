@@ -7,6 +7,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { accessTokenJwtConstants } from './constants/access_token.constants';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
+import { WinstonModule } from 'nest-winston';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 describe('AccountService', () => {
   let testingModule: TestingModule;
@@ -21,6 +25,7 @@ describe('AccountService', () => {
           signOptions: { expiresIn: accessTokenJwtConstants.expiresIn },
         }),
         AccountModule,
+        WinstonModule.forRoot(logger.console()),
       ],
       providers: [
         AccountService,

@@ -1,19 +1,26 @@
 import { CreateApplicationDto } from './dto/create-application.dto';
-import { BadRequestException, ConflictException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Inject,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Application, ApplicationDocument } from './application.schema';
 import { isValidObjectId, Model } from 'mongoose';
 import { v4 as generateUUID } from 'uuid';
 import { User, UserDocument } from '../user/user.schema';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Injectable()
 export class ApplicationService {
-  private readonly logger = new Logger('application');
-
   constructor(
     @InjectModel(Application.name) private applicationModel: Model<ApplicationDocument>,
     @InjectModel('User') private userModel: Model<UserDocument>,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger = new Logger('application'),
   ) {}
 
   async create(createApplicationDto: CreateApplicationDto, authorizedUser: LoggedInUser): Promise<Application> {

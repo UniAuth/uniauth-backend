@@ -24,10 +24,11 @@ import { MailerService } from '../mailer/mailer.service';
 import { RequestPasswordResetDto } from '../user/dto/request-password-reset.dto';
 import { ResetPasswordDto } from '../user/dto/reset-password.dto';
 import { appData } from '../../config/appData';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Controller('account')
 export class AccountController {
-  private readonly logger = new Logger('account');
+  // private readonly logger = new Logger('account');
 
   constructor(
     private readonly accountService: AccountService,
@@ -35,6 +36,7 @@ export class AccountController {
     @Inject(AuthService) private readonly authService: AuthService,
     @Inject(ApplicationService) private readonly applicationService: ApplicationService,
     @Inject(MailerService) private readonly mailerService: MailerService,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger = new Logger('account'),
   ) {}
 
   /**

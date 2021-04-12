@@ -1,10 +1,14 @@
 import * as mongooseUniquevalidator from 'mongoose-unique-validator';
-
+import { WinstonModule } from 'nest-winston';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+
 import { UserController } from './user.controller';
 import { UserSchema } from './user.schema';
 import { UserService } from './user.service';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 @Module({
   imports: [
@@ -18,6 +22,7 @@ import { UserService } from './user.service';
         },
       },
     ]),
+    WinstonModule.forRoot(logger.console()),
   ],
   controllers: [UserController],
   providers: [UserService],

@@ -1,11 +1,15 @@
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
+import { WinstonModule } from 'nest-winston';
 import { TestingModule } from '@nestjs/testing/testing-module';
 import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
 import { newJWTConstants } from './constants/auth.constants';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 /** mocking definitions */
 describe('Auth Service', () => {
@@ -21,6 +25,7 @@ describe('Auth Service', () => {
           secret: newJWTConstants.secret,
           signOptions: { expiresIn: newJWTConstants.expiresIn },
         }),
+        WinstonModule.forRoot(logger.console()),
       ],
       providers: [
         AuthService,

@@ -2,11 +2,15 @@ import * as mongooseUniquevalidator from 'mongoose-unique-validator';
 
 import { Application, ApplicationSchema } from './application.schema';
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
+import { WinstonModule } from 'nest-winston';
 import { Test, TestingModule } from '@nestjs/testing';
 import { User, UserDocument, UserSchema } from '../user/user.schema';
 
 import { ApplicationService } from './application.service';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
+import { LoggerConfig } from '../logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 const mockUser = (): Partial<UserDocument> => ({
   name: 'some user',
@@ -42,6 +46,7 @@ describe('ApplicationService', () => {
             },
           },
         ]),
+        WinstonModule.forRoot(logger.console()),
       ],
       providers: [
         ApplicationService,
