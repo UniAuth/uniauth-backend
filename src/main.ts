@@ -8,8 +8,10 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 import { join } from 'path';
-import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
-import * as winston from 'winston';
+import { WinstonModule } from 'nest-winston';
+import { LoggerConfig } from './logger/LoggerConfig';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 /**
  * Bootstrap application by attaching middleware and initializing auxillary services
@@ -18,19 +20,7 @@ import * as winston from 'winston';
 async function bootstrap() {
   /** set the logging levels */
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    logger: WinstonModule.createLogger({
-      transports: [
-        new winston.transports.Console({
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike(),
-            winston.format.colorize(),
-          ),
-        }),
-        new winston.transports.File({ filename: 'application.log' }),
-        new winston.transports.File({ filename: 'error.log', level: 'error' }),
-      ],
-    }),
+    logger: WinstonModule.createLogger(logger.console()),
   });
 
   /** configuring public and views directory */

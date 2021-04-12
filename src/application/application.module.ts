@@ -7,6 +7,10 @@ import { ApplicationController } from './application.controller';
 import { ApplicationService } from './application.service';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { LoggerConfig } from '../logger/LoggerConfig';
+import { WinstonModule } from 'nest-winston';
+
+const logger: LoggerConfig = new LoggerConfig();
 
 @Module({
   imports: [
@@ -28,6 +32,7 @@ import { MongooseModule } from '@nestjs/mongoose';
         },
       },
     ]),
+    WinstonModule.forRoot(logger.console()),
   ],
   controllers: [ApplicationController],
   providers: [ApplicationService],

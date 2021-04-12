@@ -12,7 +12,9 @@ import {
   UnauthorizedException,
   NotFoundException,
   Logger,
+  Inject,
 } from '@nestjs/common';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
 import { AuthorizedUser } from '../user/interface/user.interface';
@@ -21,8 +23,11 @@ import { CreateApplicationDto } from './dto/create-application.dto';
 
 @Controller('application')
 export class ApplicationController {
-  private readonly logger = new Logger('application');
-  constructor(private readonly applicationService: ApplicationService) {}
+  // private readonly logger = new Logger('application');
+  constructor(
+    private readonly applicationService: ApplicationService,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger = new Logger('application'),
+  ) {}
 
   @Post()
   @UseGuards(JwtAuthGuard)
