@@ -2078,9 +2078,9 @@ cjs-module-lexer@^0.6.0:
   version "0.6.0"
   resolved "https://registry.npmjs.org/cjs-module-lexer/-/cjs-module-lexer-0.6.0.tgz"
 
-class-transformer@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.npmjs.org/class-transformer/-/class-transformer-0.3.1.tgz"
+class-transformer@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.4.0.tgz#b52144117b423c516afb44cc1c76dbad31c2165b"
 
 class-utils@^0.3.5:
   version "0.3.6"
