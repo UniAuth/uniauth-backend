@@ -1730,10 +1730,6 @@ bcryptjs@^2.3.0:
   version "2.4.3"
   resolved "https://registry.npmjs.org/bcryptjs/-/bcryptjs-2.4.3.tgz"
 
-big.js@^5.2.2:
-  version "5.2.2"
-  resolved "https://registry.npmjs.org/big.js/-/big.js-5.2.2.tgz"
-
 binary-extensions@^1.0.0:
   version "1.13.1"
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.13.1.tgz"
@@ -2695,10 +2691,6 @@ emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz"
 
-emojis-list@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/emojis-list/-/emojis-list-3.0.0.tgz"
-
 enabled@2.0.x:
   version "2.0.0"
   resolved "https://registry.npmjs.org/enabled/-/enabled-2.0.0.tgz"
@@ -2721,9 +2713,9 @@ enhanced-resolve@^4.0.0:
     memory-fs "^0.5.0"
     tapable "^1.0.0"
 
-enhanced-resolve@^5.3.1:
-  version "5.7.0"
-  resolved "https://registry.npmjs.org/enhanced-resolve/-/enhanced-resolve-5.7.0.tgz"
+enhanced-resolve@^5.0.0, enhanced-resolve@^5.3.1:
+  version "5.8.0"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.8.0.tgz#d9deae58f9d3773b6a111a5a46831da5be5c9ac0"
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
@@ -4875,14 +4867,6 @@ load-json-file@^2.0.0:
 loader-runner@^4.1.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-4.2.0.tgz"
-
-loader-utils@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/loader-utils/-/loader-utils-2.0.0.tgz"
-  dependencies:
-    big.js "^5.2.2"
-    emojis-list "^3.0.0"
-    json5 "^2.1.2"
 
 locate-path@^2.0.0:
   version "2.0.0"
@@ -7232,13 +7216,12 @@ ts-jest@26.2.0:
     semver "7.x"
     yargs-parser "18.x"
 
-ts-loader@^8.0.10:
-  version "8.1.0"
-  resolved "https://registry.npmjs.org/ts-loader/-/ts-loader-8.1.0.tgz"
+ts-loader@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-9.0.2.tgz#8e73d836122ba99f9c28f207a22d280c2502bd7a"
   dependencies:
     chalk "^4.1.0"
-    enhanced-resolve "^4.0.0"
-    loader-utils "^2.0.0"
+    enhanced-resolve "^5.0.0"
     micromatch "^4.0.0"
     semver "^7.3.4"
 
