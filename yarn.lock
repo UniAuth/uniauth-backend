@@ -5076,9 +5076,9 @@ marked@^0.7.0:
   version "0.7.0"
   resolved "https://registry.npmjs.org/marked/-/marked-0.7.0.tgz"
 
-marked@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/marked/-/marked-2.0.1.tgz"
+marked@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-2.0.3.tgz#3551c4958c4da36897bda2a16812ef1399c8d6b0"
 
 md5-file@^5.0.0:
   version "5.0.0"
@@ -7365,25 +7365,25 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
 
-typedoc-default-themes@^0.12.9:
-  version "0.12.9"
-  resolved "https://registry.npmjs.org/typedoc-default-themes/-/typedoc-default-themes-0.12.9.tgz"
+typedoc-default-themes@^0.12.10:
+  version "0.12.10"
+  resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.12.10.tgz#614c4222fe642657f37693ea62cad4dafeddf843"
 
-typedoc@^0.20.0-beta.24:
-  version "0.20.32"
-  resolved "https://registry.npmjs.org/typedoc/-/typedoc-0.20.32.tgz"
+typedoc@^0.20.36:
+  version "0.20.36"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.20.36.tgz#ee5523c32f566ad8283fc732aa8ea322d1a45f6a"
   dependencies:
     colors "^1.4.0"
     fs-extra "^9.1.0"
     handlebars "^4.7.7"
     lodash "^4.17.21"
     lunr "^2.3.9"
-    marked "^2.0.1"
+    marked "^2.0.3"
     minimatch "^3.0.0"
     progress "^2.0.3"
     shelljs "^0.8.4"
     shiki "^0.9.3"
-    typedoc-default-themes "^0.12.9"
+    typedoc-default-themes "^0.12.10"
 
 typescript@2.9.1:
   version "2.9.1"
