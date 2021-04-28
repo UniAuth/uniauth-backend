@@ -800,9 +800,9 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/bcrypt@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/@types/bcrypt/-/bcrypt-3.0.0.tgz"
+"@types/bcrypt@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/bcrypt/-/bcrypt-3.0.1.tgz#9c767594e31aa1c4ce78d23aa4351984403ca28f"
 
 "@types/body-parser@*":
   version "1.19.0"
