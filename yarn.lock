@@ -648,9 +648,9 @@
     tslib "2.1.0"
     uuid "8.3.2"
 
-"@nestjs/core@^7.0.0":
-  version "7.6.14"
-  resolved "https://registry.npmjs.org/@nestjs/core/-/core-7.6.14.tgz"
+"@nestjs/core@^7.6.15":
+  version "7.6.15"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-7.6.15.tgz#dfcc5a7804c10d07f81dde514804b484b909d08a"
   dependencies:
     "@nuxtjs/opencollective" "0.3.2"
     fast-safe-stringify "2.0.7"
