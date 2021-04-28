@@ -5251,14 +5251,14 @@ mongodb-memory-server@^6.9.3:
   dependencies:
     mongodb-memory-server-core "6.9.6"
 
-mongodb@3.6.5, mongodb@^3.6.2:
-  version "3.6.5"
-  resolved "https://registry.npmjs.org/mongodb/-/mongodb-3.6.5.tgz"
+mongodb@3.6.6, mongodb@^3.6.2:
+  version "3.6.6"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.6.tgz#92e3658f45424c34add3003e3046c1535c534449"
   dependencies:
     bl "^2.2.1"
     bson "^1.1.4"
     denque "^1.4.1"
-    require_optional "^1.0.1"
+    optional-require "^1.0.2"
     safe-buffer "^5.1.2"
   optionalDependencies:
     saslprep "^1.0.0"
@@ -5274,21 +5274,21 @@ mongoose-unique-validator@^2.0.3:
     lodash.foreach "^4.1.0"
     lodash.get "^4.0.2"
 
-mongoose@^5.12.2:
-  version "5.12.3"
-  resolved "https://registry.npmjs.org/mongoose/-/mongoose-5.12.3.tgz"
+mongoose@^5.12.6:
+  version "5.12.6"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.12.6.tgz#bbbea1bff149f2ee72cf0efc844a31a92f0546a6"
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
     kareem "2.3.2"
-    mongodb "3.6.5"
+    mongodb "3.6.6"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.8.3"
     mquery "3.2.5"
     ms "2.1.2"
     regexp-clone "1.0.0"
     safe-buffer "5.2.1"
-    sift "7.0.1"
+    sift "13.5.2"
     sliced "1.0.1"
 
 morgan@^1.9.1:
@@ -5613,6 +5613,10 @@ opn@^6.0.0:
   resolved "https://registry.npmjs.org/opn/-/opn-6.0.0.tgz"
   dependencies:
     is-wsl "^1.1.0"
+
+optional-require@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/optional-require/-/optional-require-1.0.3.tgz#275b8e9df1dc6a17ad155369c2422a440f89cb07"
 
 optional@0.1.4:
   version "0.1.4"
@@ -6320,22 +6324,11 @@ require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/require-main-filename/-/require-main-filename-2.0.0.tgz"
 
-require_optional@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/require_optional/-/require_optional-1.0.1.tgz"
-  dependencies:
-    resolve-from "^2.0.0"
-    semver "^5.1.0"
-
 resolve-cwd@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/resolve-cwd/-/resolve-cwd-3.0.0.tgz"
   dependencies:
     resolve-from "^5.0.0"
-
-resolve-from@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/resolve-from/-/resolve-from-2.0.0.tgz"
 
 resolve-from@^3.0.0:
   version "3.0.0"
@@ -6417,11 +6410,11 @@ rxjs@^6.5.4, rxjs@^6.6.0:
   dependencies:
     tslib "^1.9.0"
 
-safe-buffer@5.1.2, safe-buffer@>=5.1.0, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.2.tgz"
 
-safe-buffer@5.2.1:
+safe-buffer@5.2.1, safe-buffer@>=5.1.0, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2:
   version "5.2.1"
   resolved "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz"
 
@@ -6493,7 +6486,7 @@ scope-analyzer@^2.0.1:
     estree-is-function "^1.0.0"
     get-assigned-identifiers "^1.1.0"
 
-"semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.5.0, semver@^5.6.0:
+"semver@2 || 3 || 4 || 5", semver@^5.5.0, semver@^5.6.0:
   version "5.7.1"
   resolved "https://registry.npmjs.org/semver/-/semver-5.7.1.tgz"
 
@@ -6616,9 +6609,9 @@ shiki@^0.9.3:
     onigasm "^2.2.5"
     vscode-textmate "^5.2.0"
 
-sift@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.npmjs.org/sift/-/sift-7.0.1.tgz"
+sift@13.5.2:
+  version "13.5.2"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-13.5.2.tgz#24a715e13c617b086166cd04917d204a591c9da6"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"
