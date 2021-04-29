@@ -1,0 +1,55 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "23:30"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ts-loader
+    versions:
+    - 8.0.10
+    - 8.2.0
+    - 9.0.2
+    - 9.1.0
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.39
+    - 14.14.41
+  - dependency-name: typedoc
+    versions:
+    - 0.20.35
+  - dependency-name: mongodb-memory-server
+    versions:
+    - 6.9.6
+  - dependency-name: "@types/nodemailer"
+    versions:
+    - 6.4.1
+  - dependency-name: "@types/express"
+    versions:
+    - 4.17.11
+  - dependency-name: eslint
+    versions:
+    - 7.23.0
+  - dependency-name: "@nestjs/mongoose"
+    versions:
+    - 7.2.4
+  - dependency-name: "@types/jest"
+    versions:
+    - 26.0.22
+  - dependency-name: swagger-ui-express
+    versions:
+    - 4.1.6
+  - dependency-name: "@types/passport-jwt"
+    versions:
+    - 3.0.5
+  - dependency-name: "@nestjs/platform-express"
+    versions:
+    - 7.6.15
+  - dependency-name: jest
+    versions:
+    - 26.6.3
+  - dependency-name: typescript
+    versions:
+    - 3.9.9
