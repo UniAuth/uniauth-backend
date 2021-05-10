@@ -795,9 +795,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/bcrypt@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/@types/bcrypt/-/bcrypt-3.0.0.tgz"
+"@types/bcrypt@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/bcrypt/-/bcrypt-5.0.0.tgz#a835afa2882d165aff5690893db314eaa98b9f20"
+  dependencies:
+    "@types/node" "*"
 
 "@types/body-parser@*":
   version "1.19.0"
