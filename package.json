@@ -42,7 +42,7 @@
     "@nestjs/swagger": "^4.8.0",
     "@vitspot/vit-registration-number": "^1.0.1",
     "class-transformer": "^0.4.0",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.13.1",
     "config": "^3.3.2",
     "cookie-parser": "^1.4.5",
     "crypto": "^1.0.1",
