@@ -5303,9 +5303,9 @@ neo-async@^2.6.0, neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
 
-nest-winston@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/nest-winston/-/nest-winston-1.4.2.tgz#6bb840d1a54a6a922a1178a27b84fe220c824e8a"
+nest-winston@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/nest-winston/-/nest-winston-1.5.0.tgz#2a1d8c5e7f7abc933f10cd80e05548d03b63684b"
   dependencies:
     cli-color "^2.0.0"
     fast-safe-stringify "^2.0.7"
