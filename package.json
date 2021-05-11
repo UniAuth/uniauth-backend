@@ -47,7 +47,7 @@
     "cookie-parser": "^1.4.5",
     "crypto": "^1.0.1",
     "express-rate-limit": "^5.2.6",
-    "hbs": "^4.1.1",
+    "hbs": "^4.1.2",
     "helmet": "^4.6.0",
     "mongoose": "^5.12.8",
     "mongoose-unique-validator": "^2.0.3",
