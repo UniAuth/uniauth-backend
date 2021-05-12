@@ -1,9 +1,9 @@
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { WinstonModule } from 'nest-winston';
+import { JwtModule } from '@nestjs/jwt';
 import { User, UserDocument, UserSchema } from '../user/user.schema';
 
-import { JwtModule } from '@nestjs/jwt';
 import { MailerService } from './mailer.service';
 import { UserService } from '../user/user.service';
 import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';

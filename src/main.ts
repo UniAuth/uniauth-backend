@@ -4,11 +4,11 @@ import * as rateLimit from 'express-rate-limit';
 import * as hbs from 'hbs';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 import { join } from 'path';
 import { WinstonModule } from 'nest-winston';
+import { AppModule } from './app.module';
 import { LoggerConfig } from './logger/LoggerConfig';
 
 const logger: LoggerConfig = new LoggerConfig();

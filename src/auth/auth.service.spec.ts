@@ -1,8 +1,8 @@
-import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import { WinstonModule } from 'nest-winston';
 import { TestingModule } from '@nestjs/testing/testing-module';
+import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
 import { newJWTConstants } from './constants/auth.constants';

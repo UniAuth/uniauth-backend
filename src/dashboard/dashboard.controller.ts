@@ -1,5 +1,6 @@
 import { Controller, Get, Logger, Res, UseGuards, Request, Inject, Param, Post, Body } from '@nestjs/common';
 import { Response } from 'express';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserService } from '../user/user.service';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
@@ -7,7 +8,6 @@ import { SCOPE } from '../account/minions/scopeMapper.minion';
 import { ApplicationService } from '../application/application.service';
 import { UpdateUserDto } from '../user/dto/update-user.dto';
 import { appData } from '../../config/appData';
-import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Controller('dashboard')
 export class DashboardController {
@@ -41,6 +41,7 @@ export class DashboardController {
     const user = await this.userService.findOneById(loggedInUser.id);
     return res.render('dashboard/profile.hbs', { user, project_name: appData.Name });
   }
+
   /**
    * To load data tab
    */

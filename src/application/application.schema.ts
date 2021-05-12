@@ -46,7 +46,14 @@ export class Application {
 
   /** list of participants */
   //   @Prop({ type: [MongooseSchema.Types.ObjectId], ref: 'User', required: true, default: [] })
-  @Prop([{ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true, default: [] }])
+  @Prop([
+    {
+      type: MongooseSchema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      default: [],
+    },
+  ])
   participants: Array<User>;
 }
 

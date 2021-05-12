@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { JwtModule } from '@nestjs/jwt';
+import { WinstonModule } from 'nest-winston';
 import { AccountModule } from './account.module';
 import { AccountService } from './account.service';
 import { ApplicationService } from '../application/application.service';
-import { JwtModule } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { accessTokenJwtConstants } from './constants/access_token.constants';
 import { rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
-import { WinstonModule } from 'nest-winston';
 import { LoggerConfig } from '../logger/LoggerConfig';
 
 const logger: LoggerConfig = new LoggerConfig();

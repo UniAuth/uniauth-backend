@@ -12,6 +12,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { IncomingAuthDto, IncomingAuthLoginDto } from './dto/incoming-auth.dto';
 import { AccountService } from './account.service';
 import { LoginDto } from './dto/login.dto';
@@ -24,7 +25,6 @@ import { MailerService } from '../mailer/mailer.service';
 import { RequestPasswordResetDto } from '../user/dto/request-password-reset.dto';
 import { ResetPasswordDto } from '../user/dto/reset-password.dto';
 import { appData } from '../../config/appData';
-import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Controller('account')
 export class AccountController {

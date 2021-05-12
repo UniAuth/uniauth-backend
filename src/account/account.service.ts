@@ -1,9 +1,9 @@
-import { BadRequestException, Inject, Logger, UnauthorizedException } from '@nestjs/common';
-import { ApplicationService } from '../application/application.service';
+import { BadRequestException, Inject, Logger, UnauthorizedException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ApplicationService } from '../application/application.service';
 import { accessTokenJwtConstants } from './constants/access_token.constants';
 import { IncomingAuthDto, IncomingAuthLoginDto } from './dto/incoming-auth.dto';
-import { Injectable } from '@nestjs/common';
+
 import { Application } from '../application/application.schema';
 import { scopeMapper } from './minions/scopeMapper.minion';
 import { UserService } from '../user/user.service';

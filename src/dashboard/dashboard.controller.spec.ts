@@ -44,7 +44,7 @@ describe('DashboardController', () => {
     }).compile();
 
     controller = module.get<DashboardController>(DashboardController);
-    service: module.get<UserService>(UserService);
+    module.get<UserService>(UserService);
   });
 
   it('should be defined', () => {

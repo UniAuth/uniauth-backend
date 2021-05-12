@@ -1,9 +1,9 @@
 import * as mongooseUniquevalidator from 'mongoose-unique-validator';
 
-import { Application, ApplicationSchema } from './application.schema';
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { WinstonModule } from 'nest-winston';
 import { Test, TestingModule } from '@nestjs/testing';
+import { Application, ApplicationSchema } from './application.schema';
 import { User, UserDocument, UserSchema } from '../user/user.schema';
 
 import { ApplicationService } from './application.service';

@@ -3,11 +3,11 @@ import * as config from 'config';
 import * as nodemailer from 'nodemailer';
 import { JwtService } from '@nestjs/jwt';
 import { Model } from 'mongoose';
-import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
 import { InjectModel } from '@nestjs/mongoose';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { confirmEmailTokenConstants } from './constants/confirmEmailToken.constants';
 import { User, UserDocument } from '../user/user.schema';
 import { UserService } from '../user/user.service';
-import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Injectable()
 export class MailerService {
@@ -38,10 +38,10 @@ export class MailerService {
       const isValidToken = await this.jwtService.verifyAsync(token, confirmEmailTokenConstants);
       this.logger.verbose(`IsValidToken=${isValidToken}`);
       const updatedUser = await this.userModel.findByIdAndUpdate(isValidToken.id, { verified: true });
-      this.logger.verbose(`Updated User`, JSON.stringify(updatedUser));
+      this.logger.verbose('Updated User', JSON.stringify(updatedUser));
       return isValidToken;
     } catch (e) {
-      throw new UnauthorizedException(`invalid access`);
+      throw new UnauthorizedException('invalid access');
     }
   }
 
@@ -52,7 +52,7 @@ export class MailerService {
       this.logger.verbose(`IsValidToken=${isValidToken}`);
       return isValidToken;
     } catch (e) {
-      throw new UnauthorizedException(`invalid access`);
+      throw new UnauthorizedException('invalid access');
     }
   }
 

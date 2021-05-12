@@ -10,11 +10,7 @@ import { newJWTConstants } from '../constants/auth.constants';
 export class CookieStratergy extends PassportStrategy(Strategy) {
   constructor(private readonly userService: UserService) {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => {
-          return request?.cookies?.Authentication;
-        },
-      ]),
+      jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => request?.cookies?.Authentication]),
       secretOrKey: newJWTConstants.secret,
     });
   }

@@ -33,7 +33,7 @@ export class ApplicationController {
   @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   create(@Request() req, @Body() createApplicationDto: CreateApplicationDto) {
-    const user: LoggedInUser = req.user;
+    const { user } = req;
     this.logger.verbose(`${user.email} creating ${createApplicationDto.name}`);
     return this.applicationService.create(createApplicationDto, user);
   }
@@ -47,7 +47,7 @@ export class ApplicationController {
   @Get(':id')
   @UsePipes(ValidationPipe)
   async findOne(@Request() req, @Param('id') id: string) {
-    const user: AuthorizedUser = req.user;
+    const { user } = req;
     const application = await this.applicationService.findOneById(id);
     if (String(application.admin) !== user.id) {
       throw new UnauthorizedException();
@@ -65,7 +65,7 @@ export class ApplicationController {
   @Delete(':id')
   @UsePipes(ValidationPipe)
   async remove(@Request() req, @Param('id') id: string) {
-    const user: AuthorizedUser = req.user;
+    const { user } = req;
     const application = await this.applicationService.findOneById(id);
     if (application === null) {
       throw new NotFoundException();

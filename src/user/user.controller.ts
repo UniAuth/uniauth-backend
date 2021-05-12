@@ -10,9 +10,9 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { AuthorizedUser } from './interface/user.interface';
 
@@ -52,7 +52,7 @@ export class UserController {
    */
   @Get('details')
   findOne(@Request() request) {
-    const user: AuthorizedUser = request.user;
+    const { user } = request;
     return this.userService.findOneById(user.id);
   }
 

@@ -3,9 +3,9 @@
  */
 import { Test, TestingModule } from '@nestjs/testing';
 import { WinstonModule } from 'nest-winston';
+import { MongooseModule } from '@nestjs/mongoose';
 import { closeInMongodConnection, rootMongooseTestModule } from '../../test-utils/MongooseTestModule';
 
-import { MongooseModule } from '@nestjs/mongoose';
 import { UserController } from './user.controller';
 import { UserSchema } from './user.schema';
 import { UserService } from './user.service';
@@ -41,7 +41,7 @@ describe('UserController', () => {
     }).compile();
 
     controller = module.get<UserController>(UserController);
-    service: module.get<UserService>(UserService);
+    module.get<UserService>(UserService);
   });
 
   it('should be defined', () => {

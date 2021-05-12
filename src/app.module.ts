@@ -1,4 +1,8 @@
 import * as config from 'config';
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
+import * as winston from 'winston';
 import { AccountModule } from './account/account.module';
 import { AppController } from './app.controller';
 import { ApplicationModule } from './application/application.module';
@@ -9,13 +13,9 @@ import { AuthModule } from './auth/auth.module';
  * defined modules, then new module would be integrated here.
  * @packageDocumentation
  */
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { mongooseConfig } from './config/mongoose.config';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
-import * as winston from 'winston';
 
 /**
  * Main Application Module

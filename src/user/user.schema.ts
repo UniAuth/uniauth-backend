@@ -63,7 +63,12 @@ export class User {
   profile: string[];
 
   /** Applications created by User */
-  @Prop({ type: [MongooseSchema.Types.ObjectId], ref: 'User', required: true, default: [] })
+  @Prop({
+    type: [MongooseSchema.Types.ObjectId],
+    ref: 'User',
+    required: true,
+    default: [],
+  })
   authorizedApplications: Array<Application>;
 }
 

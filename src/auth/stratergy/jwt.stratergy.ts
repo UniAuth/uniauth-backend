@@ -9,11 +9,7 @@ import { newJWTConstants } from '../constants/auth.constants';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => {
-          return request?.cookies?.vitAuth;
-        },
-      ]),
+      jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => request?.cookies?.vitAuth]),
       ignoreExpiration: false,
       secretOrKey: newJWTConstants.secret,
     });

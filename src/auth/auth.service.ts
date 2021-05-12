@@ -1,10 +1,10 @@
 import { JwtService } from '@nestjs/jwt';
 import { Body, Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { ObjectId } from 'mongoose';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { newJWTConstants } from './constants/auth.constants';
 import { LoginDto } from './dto/login.dto';
 import { UserService } from '../user/user.service';
-import { ObjectId } from 'mongoose';
-import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +25,7 @@ export class AuthService {
       const isValidToken = await this.jwtService.verifyAsync(token, newJWTConstants);
       return isValidToken;
     } catch (e) {
-      throw new UnauthorizedException(`invalid access`);
+      throw new UnauthorizedException('invalid access');
     }
   }
 
@@ -35,7 +35,7 @@ export class AuthService {
   async checkLogin(@Body() loginDto: LoginDto) {
     const user = await this.userService.login(loginDto);
     if (!user) {
-      throw new UnauthorizedException(`Invalid Credentials`);
+      throw new UnauthorizedException('Invalid Credentials');
     }
 
     const jwtData = { id: user._id, email: user.collegeEmail };

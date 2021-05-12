@@ -1,4 +1,3 @@
-import { CreateApplicationDto } from './dto/create-application.dto';
 import {
   BadRequestException,
   ConflictException,
@@ -8,12 +7,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Application, ApplicationDocument } from './application.schema';
 import { isValidObjectId, Model } from 'mongoose';
 import { v4 as generateUUID } from 'uuid';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Application, ApplicationDocument } from './application.schema';
 import { User, UserDocument } from '../user/user.schema';
 import { LoggedInUser } from '../auth/interface/loggedInUser.interface';
-import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { CreateApplicationDto } from './dto/create-application.dto';
 
 @Injectable()
 export class ApplicationService {
@@ -71,9 +71,8 @@ export class ApplicationService {
     if (isValidObjectId(id)) {
       const item = await this.applicationModel.findOne({ _id: id });
       return item;
-    } else {
-      throw new BadRequestException();
     }
+    throw new BadRequestException();
   }
 
   /** to return details of applications created by user */
