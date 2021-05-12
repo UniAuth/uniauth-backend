@@ -265,7 +265,7 @@ export class AccountController {
           message: 'please check your email for verification link',
         },
       };
-      this.mailerService.sendEmail(response.collegeEmail);
+      //   this.mailerService.sendEmail(response.collegeEmail);
       return res.render('account/register', { templateData, project_name: appData.Name });
     } catch (e) {
       const templateData = {
