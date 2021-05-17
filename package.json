@@ -17,7 +17,7 @@
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "test": "jest --force-exit --detectOpenHandles",
     "test:watch": "jest --watch --detectOpenHandles",
-    "test:cov": "jest --coverage --force-exit --detectOpenHandles",
+    "test:cov": "jest --coverage --verbose --force-exit --detectOpenHandles",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docs:compodoc": "compodoc -p tsconfig.json -s",
