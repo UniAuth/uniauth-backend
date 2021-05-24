@@ -52,7 +52,7 @@
     "mongoose": "^5.12.8",
     "mongoose-unique-validator": "^2.0.3",
     "nest-winston": "^1.4.2",
-    "nodemailer": "^6.4.18",
+    "nodemailer": "^6.6.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
