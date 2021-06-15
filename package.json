@@ -49,7 +49,7 @@
     "express-rate-limit": "^5.2.6",
     "hbs": "^4.1.1",
     "helmet": "^4.6.0",
-    "mongoose": "^5.12.8",
+    "mongoose": "^5.12.14",
     "mongoose-unique-validator": "^2.0.3",
     "nest-winston": "^1.4.2",
     "nodemailer": "^6.4.18",
